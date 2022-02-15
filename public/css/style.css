@@ -1,0 +1,23 @@
+.slider h3,
+.slider h5 
+.members h3{
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.parallax-container {
+	height: 300px;
+}
+
+.parallax img {
+	filter: grayscale(1);
+	opacity: 0.8 !important;
+}
+
+.members img {
+	max-width: 250px;
+	
+}
+
+section, footer {
+	padding: 10px 0;
+}

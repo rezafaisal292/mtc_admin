@@ -1,0 +1,13 @@
+{
+    "name": "Pageweb",
+    "alias": "pageweb",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Pageweb\\Providers\\PagewebServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

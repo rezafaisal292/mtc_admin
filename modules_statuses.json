@@ -3,5 +3,10 @@
     "MasterPage": true,
     "Opsi": true,
     "MasterUser": true,
-    "MasterRole": true
+    "MasterRole": true,
+    "LandingHome": true,
+    "Services": true,
+    "Pageweb": true,
+    "Profile": true,
+    "Member": true
 }

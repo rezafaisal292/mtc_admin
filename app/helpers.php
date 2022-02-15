@@ -261,11 +261,11 @@ if (!function_exists('permissionList')) {
      */
     function permissionList()
     {
-        $uri = request()->segment(1);
-        $permission = Permission::where('name','like','%'.$uri.'%')->where('display_name','Index')->pluck('name')->toArray();
-        $permissionList = 'permission:'.implode('|',$permission);
-    //    dd($permissionList);
-        return $permissionList;
+    //     $uri = request()->segment(1);
+    //     $permission = Permission::where('name','like','%'.$uri.'%')->where('display_name','Index')->pluck('name')->toArray();
+    //     $permissionList = 'permission:'.implode('|',$permission);
+    // //    dd($permissionList);
+        // return $permissionList;
     }
 }
 

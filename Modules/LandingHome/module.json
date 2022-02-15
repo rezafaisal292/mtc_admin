@@ -1,0 +1,13 @@
+{
+    "name": "LandingHome",
+    "alias": "landinghome",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LandingHome\\Providers\\LandingHomeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
