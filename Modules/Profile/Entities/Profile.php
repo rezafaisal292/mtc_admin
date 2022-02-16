@@ -53,7 +53,7 @@ class Profile extends Model
     public function scopeLanding($query)
     {
 
-        $q = $query->select()->where('status','1')->get();
+        $q = $query->select()->first();
           
         return $q;
     }

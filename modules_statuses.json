@@ -8,5 +8,6 @@
     "Services": true,
     "Pageweb": true,
     "Profile": true,
-    "Member": true
+    "Member": true,
+    "Landingservices": true
 }

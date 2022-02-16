@@ -1,16 +1,15 @@
 <?php
 
-namespace Modules\LandingHome\Http\Controllers;
+namespace Modules\Landingservices\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Member\Entities\Member;
 use Modules\Pageweb\Entities\Pageweb;
 use Modules\Profile\Entities\Profile;
 use Modules\Services\Entities\Services;
 
-class LandingHomeController extends Controller
+class LandingservicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +17,11 @@ class LandingHomeController extends Controller
      */
     public function index(Request $request)
     {
+
         $services = Services::Landing();
         $pageweb = Pageweb::Landing();
-        $member = Member::Landing();
         $profile = Profile::Landing();
-        return view('landinghome::index',compact('services','pageweb','member','profile'));
+        return view('landingservices::index',compact('profile','services','pageweb'));
     }
 
     /**
@@ -31,7 +30,7 @@ class LandingHomeController extends Controller
      */
     public function create()
     {
-        return view('landinghome::form');
+        return view('landingservices::form');
     }
 
     /**
@@ -42,7 +41,7 @@ class LandingHomeController extends Controller
     public function store(Request $request)
     {
         //
-        return redirect('landinghome');
+        return redirect('landingservices');
     }
 
     /**
@@ -52,7 +51,7 @@ class LandingHomeController extends Controller
      */
     public function show($id)
     {
-        return view('landinghome::show');
+        return view('landingservices::show');
     }
 
     /**
@@ -62,7 +61,7 @@ class LandingHomeController extends Controller
      */
     public function edit($id)
     {
-        return view('landinghome::edit');
+        return view('landingservices::edit');
     }
 
     /**
@@ -74,7 +73,7 @@ class LandingHomeController extends Controller
     public function update(Request $request, $id)
     {
         //
-        return redirect('landinghome');
+        return redirect('landingservices');
     }
 
     /**
@@ -86,6 +85,6 @@ class LandingHomeController extends Controller
     {
         //
 
-        return redirect('landinghome');
+        return redirect('landingservices');
     }
 }
