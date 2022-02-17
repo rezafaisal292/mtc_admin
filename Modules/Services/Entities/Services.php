@@ -34,6 +34,8 @@ class Services extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
+        if($request->label)
+            $query->where('label','ilike','%'.$request->label.'%');
 
         $q = $query->select();
                  
@@ -50,7 +52,7 @@ class Services extends Model
     public function scopeLanding($query)
     {
 
-        $q = $query->select()->where('status','1')->get();
+        $q = $query->select()->where('status','1')->orderby('label','asc')->get();
           
         return $q;
     }

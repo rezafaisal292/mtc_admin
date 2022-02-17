@@ -1,0 +1,13 @@
+{
+    "name": "Landingmember",
+    "alias": "landingmember",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Landingmember\\Providers\\LandingmemberServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

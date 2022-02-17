@@ -9,5 +9,8 @@
     "Pageweb": true,
     "Profile": true,
     "Member": true,
-    "Landingservices": true
+    "Landingservices": true,
+    "Landingproject": true,
+    "Landingmember": true,
+    "Landingprofile": true
 }

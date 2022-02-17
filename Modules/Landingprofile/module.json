@@ -1,0 +1,13 @@
+{
+    "name": "Landingprofile",
+    "alias": "landingprofile",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Landingprofile\\Providers\\LandingprofileServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

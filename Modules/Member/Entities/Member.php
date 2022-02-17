@@ -34,6 +34,8 @@ class Member extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
+        if($request->name)
+        $query->where('name','ilike','%'.$request->name.'%');
 
         $q = $query->select();
                  
@@ -44,13 +46,13 @@ class Member extends Model
 
             return $q->paginate(10);
         }
-        return $q->get();
+        return $q->orderby('name','asc')->get();
     }
 
     public function scopeLanding($query)
     {
 
-        $q = $query->select()->get();
+        $q = $query->select()->orderby('name','asc')->get();
           
         return $q;
     }

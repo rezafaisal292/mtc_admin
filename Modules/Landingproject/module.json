@@ -1,0 +1,13 @@
+{
+    "name": "Landingproject",
+    "alias": "landingproject",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Landingproject\\Providers\\LandingprojectServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

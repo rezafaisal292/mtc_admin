@@ -5,6 +5,7 @@ namespace Modules\Member\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Member\Entities\Member;
 
 class MemberController extends Controller
 {
@@ -14,7 +15,8 @@ class MemberController extends Controller
      */
     public function index(Request $request)
     {
-        return view('member::index');
+        $data=Member::fetch($request);
+        return view('member::index',compact('data'));
     }
 
     /**
@@ -23,7 +25,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('member::form');
+        $d= new Member;
+        return view('member::form',compact('d'));
     }
 
     /**
@@ -33,8 +36,9 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('member');
+        
+        Member::create($request->all());
+        return redirect('member')->with(['success' => '`' . $request->name . '` Berhasil disimpan']);
     }
 
     /**
@@ -52,9 +56,10 @@ class MemberController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Member $member)
     {
-        return view('member::edit');
+        $d=$member;
+        return view('member::form',compact('d'));
     }
 
     /**
@@ -63,10 +68,11 @@ class MemberController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Member $member)
     {
-        //
-        return redirect('member');
+        
+        $member->update($request->all());
+        return redirect('member')->with(['success' => '`' . $request->name . '` Berhasil diubah']);
     }
 
     /**
@@ -74,10 +80,11 @@ class MemberController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Member $member)
     {
-        //
+        $name= $member->name;
+        $member->delete();
 
-        return redirect('member');
+        return redirect('member')->with(['success' => '`' . $name . '` Berhasil dihapus']);
     }
 }

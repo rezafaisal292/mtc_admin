@@ -17,7 +17,14 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['memb
     </div>
     <div class="card-body">
         <div class="form-group row">
-            
+            <div class="col-md-6">
+                {{ Form::fgText('Nama', 'name', $d->name, ['class' => 'form-control'], null, 'text', true) }}
+                  </div>
+            <div class="col-md-12">
+                <b>Deskripsi</b>
+
+                {!! Form::textarea('descp', $d->descp, ['class' => 'form-control'], true) !!}
+            </div>
         </div>
     </div>
 

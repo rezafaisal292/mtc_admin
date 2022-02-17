@@ -5,6 +5,7 @@ namespace Modules\Profile\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Profile\Entities\Profile;
 
 class ProfileController extends Controller
 {
@@ -12,9 +13,10 @@ class ProfileController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('profile::index');
+        $d=Profile::first();
+        return view('profile::index',compact('d'));
     }
 
     /**
@@ -63,10 +65,10 @@ class ProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Profile $profile)
     {
-        //
-        return redirect('profile');
+        $profile->update($request->all());
+        return redirect('profile')->with(['success' => '`' . $request->name . '` Berhasil disimpan']);
     }
 
     /**

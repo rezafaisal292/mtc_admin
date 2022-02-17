@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware' =>['auth',permissionList()]], function() {
-    Route::resource('masterrole', 'MasterRoleController');
+// use MasterRoleController;
+Route::group(['middleware' =>['auth']], function() {
+    Route::resource('masterrole', MasterRoleController::class);
     });

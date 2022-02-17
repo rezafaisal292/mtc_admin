@@ -21,8 +21,9 @@ class Profile extends Model
         'name',
         'phone',
         'email',
-        'addres',
+        'address',
         'longlat',
+        'descp'
     ];
     protected $table = 'app_profile';
 

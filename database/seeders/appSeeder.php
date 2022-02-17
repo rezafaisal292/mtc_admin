@@ -48,7 +48,14 @@ class appSeeder extends Seeder
                     ]
                 ],
             ],
-
+            [
+                'id' => Uuid::uuid4(), 'nama' => 'Profile', 'url' => 'profile', 'icon' => 'fas fa-solid fa-address-card', 'parent' => null,
+                'urutan' => 5, 'status' => '1','childs'=>[]
+            ],
+            [
+                'id' => Uuid::uuid4(), 'nama' => 'Member', 'url' => 'member', 'icon' => 'fas fa-solid fa-family', 'parent' => null,
+                'urutan' => 6, 'status' => '1','childs'=>[]
+            ],
         ];
 
         foreach ($mstPage as $page) {

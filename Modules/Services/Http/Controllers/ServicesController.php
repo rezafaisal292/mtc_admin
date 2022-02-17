@@ -5,6 +5,7 @@ namespace Modules\Services\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Services\Entities\Services;
 
 class ServicesController extends Controller
 {
@@ -14,7 +15,9 @@ class ServicesController extends Controller
      */
     public function index(Request $request)
     {
-        return view('services::index');
+        $data= Services::fetch($request);
+
+        return view('services::index',compact('data'));
     }
 
     /**
@@ -23,7 +26,8 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return view('services::form');
+        $d= new Services;
+        return view('services::form',compact('d'));
     }
 
     /**
@@ -33,8 +37,9 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('services');
+        
+        Services::create($request->all());
+        return redirect('services')->with(['success' => '`' . $request->label . '` Berhasil disimpan']);
     }
 
     /**
@@ -52,9 +57,11 @@ class ServicesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Services $service)
     {
-        return view('services::edit');
+
+        $d=$service;
+        return view('services::form',compact('d'));
     }
 
     /**
@@ -63,10 +70,11 @@ class ServicesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Services $service)
     {
         //
-        return redirect('services');
+        $service->update($request->all());
+        return redirect('services')->with(['success' => '`' . $service->label . '` Berhasil diubah']);
     }
 
     /**
@@ -74,10 +82,11 @@ class ServicesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Services $service)
     {
-        //
+        $service->delete();
 
-        return redirect('services');
+
+        return redirect('services')->with(['success' => '`' . $service->label . '` Berhasil dihapus']);
     }
 }

@@ -11,7 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('services', 'ServicesController');
+    Route::post('services/filter', 'ServicesController@index');
     });
