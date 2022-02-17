@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\Landingproject\Providers;
+namespace Modules\Landingproduk\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class LandingprojectServiceProvider extends ServiceProvider
+class LandingprodukServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Landingproject';
+    protected $moduleName = 'Landingproduk';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'landingproject';
+    protected $moduleNameLower = 'landingproduk';
 
     /**
      * Boot the application events.

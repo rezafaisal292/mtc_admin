@@ -3,9 +3,6 @@ $segment = request()->segment(1);
 @endphp
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
-
-
 @section('title', env('APP_NAME').'::$STUDLY_NAME$')
 
 @section('content_header')

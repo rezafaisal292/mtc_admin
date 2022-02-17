@@ -36,6 +36,8 @@
     @endif
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <link rel="stylesheet" href="{{asset('vendor/summernote/summernote-bs4.min.css')}}">
+
     {{-- Livewire Styles --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)
@@ -83,6 +85,7 @@
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <script src="{{ asset('vendor/summernote/summernote-bs4.min.js')}}"></script>
 
         {{-- Configured Scripts --}}
         @include('adminlte::plugins', ['type' => 'js'])
@@ -94,6 +97,19 @@
     @endif
 
     <script src="{{ asset('js/master.js') }}"></script>
+    <script>
+        $(function () {
+          // Summernote
+          $('#summernote').summernote()
+      
+          // CodeMirror
+          CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            mode: "htmlmixed",
+            theme: "monokai"
+          });
+        })
+      </script>
+
 
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))

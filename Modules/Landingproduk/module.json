@@ -1,11 +1,11 @@
 {
-    "name": "Landingproject",
-    "alias": "landingproject",
+    "name": "Landingproduk",
+    "alias": "landingproduk",
     "description": "",
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Landingproject\\Providers\\LandingprojectServiceProvider"
+        "Modules\\Landingproduk\\Providers\\LandingprodukServiceProvider"
     ],
     "aliases": {},
     "files": [],

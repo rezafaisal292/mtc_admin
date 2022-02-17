@@ -10,7 +10,7 @@
     "Profile": true,
     "Member": true,
     "Landingservices": true,
-    "Landingproject": true,
     "Landingmember": true,
-    "Landingprofile": true
+    "Landingprofile": true,
+    "Landingproduk": true
 }

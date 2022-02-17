@@ -11,5 +11,7 @@
 |
 */
 
-use Illuminate\Support\Facades\Route;
-    Route::resource('landingproject', 'LandingprojectController');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('landingproduk', 'LandingprodukController');
+    });

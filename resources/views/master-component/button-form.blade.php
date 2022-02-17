@@ -1,7 +1,7 @@
 @if($title == 'Tambah')
-<button type="submit" class="btn btn-sm btn-success">
+{{-- <button type="submit" class="btn btn-sm btn-success">
     <i class="fas fa-redo-alt"></i>&nbsp; Simpan
-</button>
+</button> --}}
 &nbsp;
 @endif
 <button type="submit" class="btn btn-sm btn-primary">

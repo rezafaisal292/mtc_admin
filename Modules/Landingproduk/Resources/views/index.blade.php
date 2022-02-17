@@ -3,30 +3,33 @@ $segment = request()->segment(1);
 @endphp
 @extends('adminlte::page')
 
-@section('title', env('APP_NAME').'::Member')
+@section('title', 'AdminLTE')
+
+
+@section('title', env('APP_NAME').'::Landingproduk')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Member</h1>
+    <h1 class="m-0 text-dark">Landingproduk</h1>
 @stop
 
 @section('content')
-@include('member::filter')
+@include('landingproduk::filter')
 <div class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
         <div class="row">
           <div class="col-md-6" style="text-align:left">
-             Total Data : {{$data->total()}} 
+             {{-- Total Data : {{$data->total()}}  --}}
           </div>
           <div class="col-md-6" style="text-align:right">
-            {{-- <button type="submit" class="btn btn-success btn-sm">
+            <button type="submit" class="btn btn-success btn-sm">
               <i class="fas fa-file-excel"></i>&nbsp; Export XLS
             </button>
             &nbsp;
             <button type="submit" class="btn btn-danger btn-sm">
               <i class="fas fa-file-excel"></i>&nbsp; Export PDF
-            </button> --}}
+            </button>
           </div>
         </div>
       </div>
@@ -36,22 +39,17 @@ $segment = request()->segment(1);
           <thead>
             <tr>
               <th>Aksi</th>
-              <th>Image</th>
-              <th>Nama</th>
-              <th>Descp</th>
             </tr>
           </thead>
           <tbody>
-             @foreach ($data as $d)
+             {{-- @foreach ($data as $d)
             <tr>
               <td>
               @include('master-component.button-edit-delete')
               </td>
-              <td><img src="{{asset($d->image)}}"></td>
-              <td>{{$d->name}}</td>
-              <td>{{substr($d->descp,0,50)}}</td>
+              
             </tr>
-            @endforeach 
+            @endforeach  --}}
           </tbody>
         </table>
       </div>

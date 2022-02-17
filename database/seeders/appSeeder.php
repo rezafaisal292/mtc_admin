@@ -49,11 +49,11 @@ class appSeeder extends Seeder
                 ],
             ],
             [
-                'id' => Uuid::uuid4(), 'nama' => 'Profile', 'url' => 'profile', 'icon' => 'fas fa-solid fa-address-card', 'parent' => null,
+                'id' => Uuid::uuid4(), 'nama' => 'Profile', 'url' => 'profile', 'icon' => 'fas fa-fw fa-address-book', 'parent' => null,
                 'urutan' => 5, 'status' => '1','childs'=>[]
             ],
             [
-                'id' => Uuid::uuid4(), 'nama' => 'Member', 'url' => 'member', 'icon' => 'fas fa-solid fa-family', 'parent' => null,
+                'id' => Uuid::uuid4(), 'nama' => 'Member', 'url' => 'member', 'icon' => 'fas fa-fw fa-id-card', 'parent' => null,
                 'urutan' => 6, 'status' => '1','childs'=>[]
             ],
         ];
@@ -117,8 +117,8 @@ class appSeeder extends Seeder
                 'status' => '1',
             ],
             [
-                'url' => 'landingproject',
-                'name' => 'Project',
+                'url' => 'landingproduk',
+                'name' => 'Produk',
                 'urutan' => 2,
                 'status' => '1',
             ],

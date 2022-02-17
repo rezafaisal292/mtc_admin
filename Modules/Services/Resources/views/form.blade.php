@@ -31,8 +31,9 @@ if ($segment !== 'create') {
             </div>
             <div class="col-md-12">
                 <b>Deskripsi</b>
-
-                {!! Form::textarea('descp', $d->descp, ['class' => 'form-control'], true) !!}
+                <textarea id="summernote" style="display: none;" name="descp">
+                {{$d->descp}}
+                 </textarea>
             </div>
 
         </div>

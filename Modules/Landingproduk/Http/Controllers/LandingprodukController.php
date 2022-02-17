@@ -1,15 +1,12 @@
 <?php
 
-namespace Modules\Landingproject\Http\Controllers;
+namespace Modules\Landingproduk\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Pageweb\Entities\Pageweb;
-use Modules\Profile\Entities\Profile;
-use Modules\Services\Entities\Services;
 
-class LandingprojectController extends Controller
+class LandingprodukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +14,7 @@ class LandingprojectController extends Controller
      */
     public function index(Request $request)
     {
-
-        $services = Services::Landing();
-        $pageweb = Pageweb::Landing();
-        $profile = Profile::Landing();
-        return view('landingproject::index',compact('profile','services','pageweb'));
+        return view('landingproduk::index');
     }
 
     /**
@@ -30,7 +23,7 @@ class LandingprojectController extends Controller
      */
     public function create()
     {
-        return view('landingproject::form');
+        return view('landingproduk::form');
     }
 
     /**
@@ -41,7 +34,7 @@ class LandingprojectController extends Controller
     public function store(Request $request)
     {
         //
-        return redirect('landingproject');
+        return redirect('landingproduk');
     }
 
     /**
@@ -51,7 +44,7 @@ class LandingprojectController extends Controller
      */
     public function show($id)
     {
-        return view('landingproject::show');
+        return view('landingproduk::show');
     }
 
     /**
@@ -61,7 +54,7 @@ class LandingprojectController extends Controller
      */
     public function edit($id)
     {
-        return view('landingproject::edit');
+        return view('landingproduk::edit');
     }
 
     /**
@@ -73,7 +66,7 @@ class LandingprojectController extends Controller
     public function update(Request $request, $id)
     {
         //
-        return redirect('landingproject');
+        return redirect('landingproduk');
     }
 
     /**
@@ -85,6 +78,6 @@ class LandingprojectController extends Controller
     {
         //
 
-        return redirect('landingproject');
+        return redirect('landingproduk');
     }
 }
