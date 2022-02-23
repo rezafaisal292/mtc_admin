@@ -46,29 +46,67 @@ class AppTable extends Migration
 
         Schema::create('app_member', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('url',100)->nullable();
             $table->string('image',100)->nullable();
             $table->string('name',50)->nullable();
             $table->text('descp')->nullable();
             $table->timestamps();
         });
 
+        Schema::create('app_member_detail', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('url',100);
+            $table->string('image',100);
+            $table->text('descp')->nullable();
+            $table->char('status',1);
+            $table->timestamps();
+        });
+
+
+        Schema::create('app_produk', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('url',100)->nullable();
+            $table->string('image',100)->nullable();
+            $table->string('label',30)->nullable();
+            $table->string('descp',100)->nullable();
+            $table->uuid('member')->nullable();
+            $table->uuid('services')->nullable();
+            $table->char('tipe_produk',1);
+            $table->char('status',1);
+            $table->timestamps();
+            
+        });
+        Schema::create('app_produk_detail', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('url',100)->nullable();
+            $table->string('image',100)->nullable();
+            $table->string('label',30)->nullable();
+            $table->string('descp',100)->nullable();
+            $table->uuid('id_produk')->nullable();
+            $table->timestamps();
+
+            $table->foreign('id_produk')->references('id')->on('app_produk')
+            ->onUpdate('cascade')->onDelete('cascade');
+
+        });
+
+        
         Schema::create('app_banner', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('image');
+            $table->string('image',100)->nullable();
             $table->string('label',30)->nullable();
             $table->string('descp',100)->nullable();
             $table->char('status');
             $table->timestamps();
         });
-      
-        Schema::create('app_member_image', function (Blueprint $table) {
+        Schema::create('app_sosmed', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('image');
-            $table->text('descp')->nullable();
+            $table->string('image',100)->nullable();
+            $table->string('label',30)->nullable();
+            $table->uuid('member')->nullable();
             $table->char('status');
             $table->timestamps();
         });
-
 
     }
 

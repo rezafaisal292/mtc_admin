@@ -5,6 +5,11 @@ namespace Modules\Landingproduk\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Member\Entities\Member;
+use Modules\Pageweb\Entities\Pageweb;
+use Modules\Produk\Entities\Produk;
+use Modules\Profile\Entities\Profile;
+use Modules\Services\Entities\Services;
 
 class LandingprodukController extends Controller
 {
@@ -14,7 +19,13 @@ class LandingprodukController extends Controller
      */
     public function index(Request $request)
     {
-        return view('landingproduk::index');
+        $services = Services::Landing();
+        $pageweb = Pageweb::Landing();
+        $member = Member::Landing();
+        $profile = Profile::Landing();
+        $produk = Produk::LandingHome();
+        return view('landingproduk::index',compact('services','pageweb','member','profile','produk'));
+ 
     }
 
     /**

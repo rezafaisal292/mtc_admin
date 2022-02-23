@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Member\Entities\Member;
 use Modules\Pageweb\Entities\Pageweb;
+use Modules\Produk\Entities\Produk;
 use Modules\Profile\Entities\Profile;
 use Modules\Services\Entities\Services;
 
@@ -22,7 +23,8 @@ class LandingHomeController extends Controller
         $pageweb = Pageweb::Landing();
         $member = Member::Landing();
         $profile = Profile::Landing();
-        return view('landinghome::index',compact('services','pageweb','member','profile'));
+        $produk = Produk::LandingHome();
+        return view('landinghome::index',compact('services','pageweb','member','profile','produk'));
     }
 
     /**

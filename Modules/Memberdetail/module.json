@@ -1,0 +1,13 @@
+{
+    "name": "Memberdetail",
+    "alias": "memberdetail",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Memberdetail\\Providers\\MemberdetailServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

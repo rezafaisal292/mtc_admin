@@ -47,7 +47,7 @@ $segment = request()->segment(1);
               <td>
               @include('master-component.button-edit-delete')
               </td>
-              <td><img src="{{asset($d->image)}}"></td>
+              <td><img src="{{asset($d->image)}}" width="30%"></td>
               <td>{{$d->name}}</td>
               <td>{{substr($d->descp,0,50)}}</td>
             </tr>

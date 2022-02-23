@@ -12,5 +12,9 @@
     "Landingservices": true,
     "Landingmember": true,
     "Landingprofile": true,
-    "Landingproduk": true
+    "Landingproduk": true,
+    "Produk": true,
+    "Produkdetail": true,
+    "Memberdetail": true,
+    "Sosmed": true
 }

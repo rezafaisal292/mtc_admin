@@ -24,6 +24,7 @@ class Profile extends Model
         'address',
         'longlat',
         'descp'
+        
     ];
     protected $table = 'app_profile';
 

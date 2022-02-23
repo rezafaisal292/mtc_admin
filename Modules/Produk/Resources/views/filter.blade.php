@@ -1,4 +1,4 @@
-{{ Form::open(['url' => 'landingproduk/filter', 'method' => 'post', 'class' => 'form-horizontal form-filter', 'role' => 'form', 'autocomplete' => 'off']) }}
+{{ Form::open(['url' => 'produk/filter', 'method' => 'post', 'class' => 'form-horizontal form-filter', 'role' => 'form', 'autocomplete' => 'off']) }}
 <div class="row">
     <div class="col-12">
         <div class="card card-info">

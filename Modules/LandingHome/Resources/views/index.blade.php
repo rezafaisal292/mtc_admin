@@ -32,7 +32,7 @@
             </li>
         </ul>
     </div>
-    
+
     <section id="services" class="services scrollspy">
         <div class="container">
             <div class="row">
@@ -100,10 +100,44 @@
         <div class="container">
             <div class="row">
                 <div class="col m3 s12">
-                    <h3 class="light black-text left">Project</h3>
+                    <h3 class="light black-text left">Produk</h3>
                 </div>
             </div>
             <div class="row">
+                @if (count($produk) > 0)
+                    @foreach ($produk as $pr)
+                        <div class="col m3 s12 center">
+                            @if ($pr->url != null)
+                                <iframe width="230" height="200" src="{{$pr->url}}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            @else
+                            @if($pr->image != null)
+                                <img src="{{ asset($pr->image) }}" width="230">
+                                @endif
+                            @endif
+
+                            <b>{{ $pr->label }}</b>
+                            <p>
+                                @php
+                                    $string = strip_tags($pr->descp);
+                                    if (strlen($string) > 100) {
+                                        // truncate string
+                                        $stringCut = substr($string, 0, 100);
+                                        $endPoint = strrpos($stringCut, ' ');
+                                    
+                                        //if the string doesn't contain any space then it will cut without word basis.
+                                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                        $string .= '... <a href="/this/story">Read More</a>';
+                                    }
+                                    echo $string;
+                                @endphp
+                            </p>
+
+                        </div>
+                    @endforeach
+                @endif
             </div>
     </section>
 
@@ -118,9 +152,11 @@
 
                 @if (count($member) > 0)
                     @foreach ($member as $m)
+                    @if($m->image!=null)
                         <div class="col m3 s12 center">
-                            <img src="{{ asset($m->image) }}">
+                            <img src="{{ asset($m->image) }}" width="100%" >
                         </div>
+                        @endif
                     @endforeach
                 @endif
             </div>

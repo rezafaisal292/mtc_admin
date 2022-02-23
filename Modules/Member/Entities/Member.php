@@ -59,7 +59,7 @@ class Member extends Model
 
     public function scopeFindByName($query, string $value)
     {
-        return $query->where('label', $value)->first();
+        return $query->where('name', $value)->first();
     }
 
 }

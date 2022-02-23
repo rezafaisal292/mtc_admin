@@ -1,0 +1,13 @@
+{
+    "name": "Sosmed",
+    "alias": "sosmed",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Sosmed\\Providers\\SosmedServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
