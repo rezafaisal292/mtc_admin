@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Produk\Entities;
+namespace Modules\ProdukDetail\Entities;
 
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Produk extends Model
+class ProdukDetail extends Model
 {
 	use Uuids;
 
@@ -21,13 +21,11 @@ class Produk extends Model
         'image',
         'label',
         'descp',
-        'member',
-        'services',
-        'tipe_produk',
+        'id_produk',
         'status'
         
     ];
-    protected $table = 'app_produk';
+    protected $table = 'app_produk_detail';
 
 	protected 	$primaryKey = 'id';
     /**
@@ -42,16 +40,6 @@ class Produk extends Model
     {
         if($request->label)
             $query->where('label','like','%'.$request->label.'%');
-
-        if($request->member)
-            $query->where('member',$request->member);
-
-        if($request->services)
-            $query->where('services',$request->services);
-
-
-        if($request->tipe_produk)
-        $query->where('tipe_produk',$request->tipe_produk);
 
         if($request->status)
         $query->where('status',$request->status);

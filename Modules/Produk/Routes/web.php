@@ -11,7 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('produk', 'ProdukController');
+    Route::post('produk/filter', 'ProdukController@index');
     });

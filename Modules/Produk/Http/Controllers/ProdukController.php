@@ -19,7 +19,10 @@ class ProdukController extends Controller
     public function index(Request $request)
     {
         $data = Produk::fetch($request);
-        return view('produk::index', compact('data'));
+
+        $member = to_dropdown(Member::Landing(), 'id', 'name');
+        $services = to_dropdown(Services::Landing(), 'id', 'label');
+        return view('produk::index', compact('data','member','services'));
     }
 
     /**

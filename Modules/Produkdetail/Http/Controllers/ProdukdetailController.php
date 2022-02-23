@@ -5,6 +5,8 @@ namespace Modules\Produkdetail\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Produk\Entities\Produk;
+use Modules\ProdukDetail\Entities\ProdukDetail;
 
 class ProdukdetailController extends Controller
 {
@@ -14,7 +16,10 @@ class ProdukdetailController extends Controller
      */
     public function index(Request $request)
     {
-        return view('produkdetail::index');
+        $data = ProdukDetail::fetch($request);
+
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'name');
+        return view('produkdetail::index',compact('data','produk'));
     }
 
     /**
