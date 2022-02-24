@@ -87,6 +87,14 @@ class appSeeder extends Seeder
                 'id' => Uuid::uuid4(), 'nama' => 'Sosmed', 'url' => 'sosmed', 'icon' => 'fas fa-fw fa-wifi', 'parent' => null,
                 'urutan' => 8, 'status' => '1', 'childs' => []
             ],
+            [
+                'id' => Uuid::uuid4(), 'nama' => 'Banner', 'url' => 'banner', 'icon' => 'fas fa-fw fa-images', 'parent' => null,
+                'urutan' => 9, 'status' => '1', 'childs' => []
+            ],
+            [
+                'id' => Uuid::uuid4(), 'nama' => 'Client', 'url' => 'client', 'icon' => 'fas fa-fw fa-briefcase', 'parent' => null,
+                'urutan' => 10, 'status' => '1', 'childs' => []
+            ],
         ];
 
         foreach ($mstPage as $page) {

@@ -34,10 +34,14 @@
     </div>
 
     <section id="services" class="services scrollspy">
+     
         <div class="container">
+            <h3 class="light black-text center">PROFILE</h3>
             <div class="row">
-                <div class="col s12 m12">
-                    <h3>{{ $profile->name }}</h3>
+                <div class="col m12 light">
+                    <div class="progress">
+                        <div class="determinate" style="width: 100%"></div>
+                    </div>
                     <p>
                         @php
                             $string = strip_tags($profile->descp);
@@ -55,6 +59,7 @@
                     </p>
                 </div>
             </div>
+        </div>
     </section>
 
     <footer class="black">
@@ -108,13 +113,13 @@
                     @foreach ($produk as $pr)
                         <div class="col m3 s12 center">
                             @if ($pr->url != null)
-                                <iframe width="230" height="200" src="{{$pr->url}}"
-                                    title="YouTube video player" frameborder="0"
+                                <iframe width="230" height="200" src="{{ $pr->url }}" title="YouTube video player"
+                                    frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
                             @else
-                            @if($pr->image != null)
-                                <img src="{{ asset($pr->image) }}" width="230">
+                                @if ($pr->image != null)
+                                    <img src="{{ asset($pr->image) }}" width="230">
                                 @endif
                             @endif
 
@@ -152,10 +157,10 @@
 
                 @if (count($member) > 0)
                     @foreach ($member as $m)
-                    @if($m->image!=null)
-                        <div class="col m3 s12 center">
-                            <img src="{{ asset($m->image) }}" width="100%" >
-                        </div>
+                        @if ($m->image != null)
+                            <div class="col m3 s12 center">
+                                <img src="{{ asset($m->image) }}" width="100%">
+                            </div>
                         @endif
                     @endforeach
                 @endif

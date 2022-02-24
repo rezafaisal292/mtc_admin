@@ -161,10 +161,17 @@ class ProdukController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        $name = $produk->label;
+        $image_old = $produk->image;  // Value is not URL but directory file path
+        if (File::exists($image_old)) {
+            File::delete($image_old);
+        }
+        
+        $produk->delete();
 
-        return redirect('produk');
+        return redirect('produk')->with(['success' => '`' . $name . '` Berhasil dihapus']);
+
     }
 }

@@ -58,6 +58,7 @@ class AppTable extends Migration
             $table->string('url',100);
             $table->string('image',100);
             $table->text('descp')->nullable();
+            $table->uuid('id_member');
             $table->char('status',1);
             $table->timestamps();
         });
@@ -82,7 +83,7 @@ class AppTable extends Migration
             $table->string('image',100)->nullable();
             $table->string('label',30)->nullable();
             $table->string('descp',100)->nullable();
-            $table->uuid('id_produk')->nullable();
+            $table->uuid('id_produk');
             $table->timestamps();
 
             $table->foreign('id_produk')->references('id')->on('app_produk')
@@ -96,6 +97,7 @@ class AppTable extends Migration
             $table->string('image',100)->nullable();
             $table->string('label',30)->nullable();
             $table->string('descp',100)->nullable();
+            $table->integer('urutan');
             $table->char('status');
             $table->timestamps();
         });
@@ -104,6 +106,14 @@ class AppTable extends Migration
             $table->string('image',100)->nullable();
             $table->string('label',30)->nullable();
             $table->uuid('member')->nullable();
+            $table->char('status');
+            $table->timestamps();
+        });
+        Schema::create('app_client', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('image',100)->nullable();
+            $table->string('label',30)->nullable();
+            $table->string('descp',100)->nullable();
             $table->char('status');
             $table->timestamps();
         });

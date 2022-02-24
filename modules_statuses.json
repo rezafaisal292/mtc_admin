@@ -16,5 +16,7 @@
     "Produk": true,
     "Produkdetail": true,
     "Memberdetail": true,
-    "Sosmed": true
+    "Sosmed": true,
+    "Banner": true,
+    "Client": true
 }

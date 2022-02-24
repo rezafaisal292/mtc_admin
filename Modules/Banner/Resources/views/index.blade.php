@@ -3,23 +3,31 @@ $segment = request()->segment(1);
 @endphp
 @extends('adminlte::page')
 
-@section('title', env('APP_NAME').'::Produkdetail')
+@section('title', env('APP_NAME').'::Banner')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Produkdetail</h1>
+    <h1 class="m-0 text-dark">Banner</h1>
 @stop
 
 @section('content')
-@include('produkdetail::filter')
+@include('banner::filter')
 <div class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
         <div class="row">
           <div class="col-md-6" style="text-align:left">
-             Total Data : {{$data->total()}} 
+             {{-- Total Data : {{$data->total()}}  --}}
           </div>
-        
+          <div class="col-md-6" style="text-align:right">
+            <button type="submit" class="btn btn-success btn-sm">
+              <i class="fas fa-file-excel"></i>&nbsp; Export XLS
+            </button>
+            &nbsp;
+            <button type="submit" class="btn btn-danger btn-sm">
+              <i class="fas fa-file-excel"></i>&nbsp; Export PDF
+            </button>
+          </div>
         </div>
       </div>
       <!-- /.card-header -->
@@ -28,30 +36,17 @@ $segment = request()->segment(1);
           <thead>
             <tr>
               <th>Aksi</th>
-              <th>Url</th>
-              <th>Image</th>
-              <th>Label</th>
-              <th>Descp</th>
-              <th>Produk</th>
-              <th>TimeStamp</th>
             </tr>
           </thead>
           <tbody>
-             @foreach ($data as $d)
+             {{-- @foreach ($data as $d)
             <tr>
               <td>
               @include('master-component.button-edit-delete')
               </td>
-              <td>{{$d->url}}</td>
-              <td>{{$d->image}}</td>
-              <td>{{$d->label}}</td>
-              <td>{{substr($d->descp,0,30)}}</td>
-              <td>{{$d->id_produk}}</td>
-            
-              <td>{{$d->updated_at}}</td>
               
             </tr>
-            @endforeach 
+            @endforeach  --}}
           </tbody>
         </table>
       </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Produk\Entities\Produk;
 use Modules\ProdukDetail\Entities\ProdukDetail;
+use Illuminate\Support\Facades\File;
 
 class ProdukdetailController extends Controller
 {
@@ -18,7 +19,7 @@ class ProdukdetailController extends Controller
     {
         $data = ProdukDetail::fetch($request);
 
-        $produk = to_dropdown(Produk::LandingHome(), 'id', 'name');
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'label');
         return view('produkdetail::index',compact('data','produk'));
     }
 
@@ -28,7 +29,10 @@ class ProdukdetailController extends Controller
      */
     public function create()
     {
-        return view('produkdetail::form');
+        $d=new ProdukDetail;
+
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'label');
+        return view('produkdetail::form',compact('d','produk'));
     }
 
     /**
@@ -38,8 +42,37 @@ class ProdukdetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('produkdetail');
+        ProdukDetail::create($request->only('url', 'label', 'descp', 'id_produk', 'status'));
+        if ($request->file('images')) {
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/produkdetail';
+
+            $id = ProdukDetail::FindByLabel($request->label)->id;
+
+            $nameFile = $id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $imageDir =  $tujuan_upload . '/' . $nameFile;
+            ProdukDetail::find($id)->update(['image' => $imageDir]);
+        }
+
+        return redirect('produkdetail')->with(['success' => '`' . $request->label . '` Berhasil disimpan']);
     }
 
     /**
@@ -57,9 +90,13 @@ class ProdukdetailController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(ProdukDetail $produkdetail)
     {
-        return view('produkdetail::edit');
+        $d=$produkdetail;
+
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'label');
+
+        return view('produkdetail::form',compact('d','produk'));
     }
 
     /**
@@ -68,10 +105,52 @@ class ProdukdetailController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,ProdukDetail $produkdetail)
     {
-        //
-        return redirect('produkdetail');
+        if ($request->file('images')) {
+            // $validator = Validator::make($request->all(), [
+            //     'file' => 'max:500000',
+            // ]);
+            $request->validate([
+                'images' => 'max:1024',
+            ]);
+
+            $image_old = $produkdetail->image;  // Value is not URL but directory file path
+            if ($image_old != null) {
+                if (File::exists($image_old)) {
+                    File::delete($image_old);
+                }
+            }
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            // $image->getMimeType();    
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/produkdetail';
+
+
+            $nameFile = $produkdetail->id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $request['image'] =  $tujuan_upload . '/' . $nameFile;
+
+            $produkdetail->update($request->only('image','url', 'label', 'descp', 'id_produk', 'status'));
+        } else {
+            $produkdetail->update($request->only('url', 'label', 'descp', 'id_produk', 'status'));
+        }
+        return redirect('produkdetail')->with(['success' => '`' . $request->label . '` Berhasil diubah']);
     }
 
     /**
@@ -79,10 +158,16 @@ class ProdukdetailController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(ProdukDetail $produkdetail)
     {
-        //
+        $name = $produkdetail->label;
+        $image_old = $produkdetail->image;  // Value is not URL but directory file path
+        if (File::exists($image_old)) {
+            File::delete($image_old);
+        }
+        
+        $produkdetail->delete();
 
-        return redirect('produkdetail');
+        return redirect('produk')->with(['success' => '`' . $name . '` Berhasil dihapus']);
     }
 }

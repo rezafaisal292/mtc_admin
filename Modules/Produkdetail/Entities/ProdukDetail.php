@@ -22,7 +22,6 @@ class ProdukDetail extends Model
         'label',
         'descp',
         'id_produk',
-        'status'
         
     ];
     protected $table = 'app_produk_detail';
@@ -41,8 +40,6 @@ class ProdukDetail extends Model
         if($request->label)
             $query->where('label','like','%'.$request->label.'%');
 
-        if($request->status)
-        $query->where('status',$request->status);
 
 
         $q = $query->select();
