@@ -5,6 +5,7 @@ namespace Modules\Banner\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Banner\Entities\Banner;
 
 class BannerController extends Controller
 {
@@ -14,7 +15,8 @@ class BannerController extends Controller
      */
     public function index(Request $request)
     {
-        return view('banner::index');
+        $data=Banner::fetch($request);
+        return view('banner::index',compact('data'));
     }
 
     /**
@@ -23,7 +25,8 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('banner::form');
+        $d=new Banner;
+        return view('banner::form',compact('d'));
     }
 
     /**
@@ -33,8 +36,37 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('banner');
+        Banner::create($request->only( 'label', 'descp','urutan','status'));
+        if ($request->file('images')) {
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/produk';
+
+            $id = Banner::FindByLabel($request->label)->id;
+
+            $nameFile = $id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $imageDir =  $tujuan_upload . '/' . $nameFile;
+            Banner::find($id)->update(['image' => $imageDir]);
+        }
+
+        return redirect('banner')->with(['success' => '`' . $request->label . '` Berhasil disimpan']);
     }
 
     /**
