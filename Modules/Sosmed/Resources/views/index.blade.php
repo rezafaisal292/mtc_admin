@@ -56,6 +56,7 @@ $segment = request()->segment(1);
         <div class="row">
           <div class="col-6">
 
+            {{-- {{ $data->links() }} --}}
           </div>
           <div class="col-6 text-right">
            

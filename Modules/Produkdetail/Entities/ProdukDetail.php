@@ -5,6 +5,7 @@ namespace Modules\ProdukDetail\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Produk\Entities\Produk;
 
 class ProdukDetail extends Model
 {
@@ -40,6 +41,10 @@ class ProdukDetail extends Model
         if($request->label)
             $query->where('label','like','%'.$request->label.'%');
 
+        if($request->id_produk)
+            $query->where('id_produk',$request->id_produk);
+
+
 
 
         $q = $query->select();
@@ -51,7 +56,7 @@ class ProdukDetail extends Model
 
             return $q->paginate(10);
         }
-        return $q->get();
+        return $q->orderby('id_produk','asc')->get();
     }
 
     public function scopeLandingHome($query)
@@ -66,5 +71,11 @@ class ProdukDetail extends Model
     {
         return $query->where('label', $value)->first();
     }
+
+    public function produk()
+    {
+        return $this->hasOne(Produk::class,'id','id_produk');
+    }
+
 
 }

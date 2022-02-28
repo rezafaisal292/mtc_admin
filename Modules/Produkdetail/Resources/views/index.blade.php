@@ -46,7 +46,7 @@ $segment = request()->segment(1);
               <td>{{$d->image}}</td>
               <td>{{$d->label}}</td>
               <td>{{substr($d->descp,0,30)}}</td>
-              <td>{{$d->id_produk}}</td>
+              <td>{{$d->produk->label}}</td>
             
               <td>{{$d->updated_at}}</td>
               
@@ -61,6 +61,7 @@ $segment = request()->segment(1);
         <div class="row">
           <div class="col-6">
 
+            {{ $data->links() }}
           </div>
           <div class="col-6 text-right">
            
