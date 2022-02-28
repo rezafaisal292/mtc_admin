@@ -9,6 +9,7 @@ use Modules\Member\Entities\Member;
 use Modules\Produk\Entities\Produk;
 use Modules\Services\Entities\Services;
 use Illuminate\Support\Facades\File;
+use Modules\ProdukDetail\Entities\ProdukDetail;
 
 class ProdukController extends Controller
 {
@@ -168,6 +169,7 @@ class ProdukController extends Controller
         if (File::exists($image_old)) {
             File::delete($image_old);
         }
+        ProdukDetail::where('id_produk',$produk->id)->delete();
         
         $produk->delete();
 

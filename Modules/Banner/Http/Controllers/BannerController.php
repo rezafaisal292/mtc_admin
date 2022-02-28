@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Banner\Entities\Banner;
+use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
@@ -55,7 +56,7 @@ class BannerController extends Controller
             // tipe mime
             $image->getMimeType();
             // isi dengan nama folder tempat kemana file diupload
-            $tujuan_upload = 'images/produk';
+            $tujuan_upload = 'images/banner';
 
             $id = Banner::FindByLabel($request->label)->id;
 
@@ -84,9 +85,10 @@ class BannerController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Banner $banner)
     {
-        return view('banner::edit');
+        $d=$banner;
+        return view('banner::form',compact('d'));
     }
 
     /**
@@ -95,10 +97,52 @@ class BannerController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Banner $banner)
     {
-        //
-        return redirect('banner');
+        if ($request->file('images')) {
+            // $validator = Validator::make($request->all(), [
+            //     'file' => 'max:500000',
+            // ]);
+            $request->validate([
+                'images' => 'max:1024',
+            ]);
+
+            $image_old = $banner->image;  // Value is not URL but directory file path
+            if ($image_old != null) {
+                if (File::exists($image_old)) {
+                    File::delete($image_old);
+                }
+            }
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            // $image->getMimeType();    
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/banner';
+
+
+            $nameFile = $banner->id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $request['image'] =  $tujuan_upload . '/' . $nameFile;
+
+            $banner->update($request->only( 'label','image', 'descp','urutan','status'));
+        } else {
+            $banner->update($request->only( 'label', 'descp','urutan','status'));
+        }
+        return redirect('banner')->with(['success' => '`' . $request->label . '` Berhasil diubah']);
     }
 
     /**
@@ -106,10 +150,18 @@ class BannerController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Banner $banner)
     {
-        //
+        $name = $banner->label;
+        $image_old = $banner->image;  // Value is not URL but directory file path
+        if (File::exists($image_old)) {
+            File::delete($image_old);
+        }
+        
+        $banner->delete();
 
-        return redirect('banner');
+        return redirect('banner')->with(['success' => '`' . $name . '` Berhasil dihapus']);
+
+
     }
 }
