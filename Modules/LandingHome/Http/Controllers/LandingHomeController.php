@@ -5,6 +5,7 @@ namespace Modules\LandingHome\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Banner\Entities\Banner;
 use Modules\Member\Entities\Member;
 use Modules\Pageweb\Entities\Pageweb;
 use Modules\Produk\Entities\Produk;
@@ -24,7 +25,8 @@ class LandingHomeController extends Controller
         $member = Member::Landing();
         $profile = Profile::Landing();
         $produk = Produk::LandingHome();
-        return view('landinghome::index',compact('services','pageweb','member','profile','produk'));
+        $banner = Banner::LandingHome();
+        return view('landinghome::index',compact('services','pageweb','member','profile','produk','banner'));
     }
 
     /**

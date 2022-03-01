@@ -1,3 +1,4 @@
+@php $alignSlide='left-align'; @endphp
 @extends('landing-page.landing')
 @section('title', $profile->name . '::Home')
 
@@ -9,40 +10,36 @@
     <!-- slider -->
     <div class="slider">
         <ul class="slides">
+            @foreach($banner as $b)
             <li>
-                <img src="{{ asset('img/services/wo6.jpg') }}">
-                <div class="caption left-align">
-                    <h3>This is our big Tagline!</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                <img src="{{ asset($b->image) }}">
+                <div class="caption {{$alignSlide}}">
+                    <h3>{{$b->label}}</h3>
+                    <h5 class="light grey-text text-lighten-3">{{$b->descp}}</h5>
                 </div>
             </li>
-            <li>
-                <img src="{{ asset('img/services/wo7.jpg') }}">
-                <div class="caption center-align">
-                    <h3>This is our big Tagline!</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                </div>
-            </li>
-            <li>
-                <img src="{{ asset('img/services/wo3.jpg') }}">
-                <div class="caption right-align">
-                    <h3>This is our big Tagline!</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                </div>
-            </li>
+            @if($alignSlide == 'left-align')
+            @php $alignSlide ='center-align' @endphp
+            @elseif( $alignSlide =='center-align')
+            @php $alignSlide ='right-align' @endphp 
+            @elseif( $alignSlide =='right-align')
+            @php $alignSlide ='left-align' @endphp
+            @else
+            @endif
+            @endforeach
+           
         </ul>
     </div>
 
     <section id="services" class="services scrollspy">
      
         <div class="container">
-            <h3 class="light black-text center">PROFILE</h3>
+            <h3 class="light black-text ">Profile</h3>
             <div class="row">
                 <div class="col m12 light">
                     <div class="progress">
                         <div class="determinate" style="width: 100%"></div>
                     </div>
-                    <p>
                         @php
                             $string = strip_tags($profile->descp);
                             if (strlen($string) > 1000) {
@@ -56,7 +53,6 @@
                             }
                             echo $string;
                         @endphp
-                    </p>
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ use Modules\Produk\Entities\Produk;
 use Modules\Profile\Entities\Profile;
 use Modules\Services\Entities\Services;
 use Illuminate\Support\Str;
+use Modules\Banner\Entities\Banner;
 
 class appSeeder extends Seeder
 {
@@ -307,6 +308,35 @@ class appSeeder extends Seeder
         ];
         foreach ($produk as $p) {
             Produk::create($p);
+        }
+
+
+        DB::table('app_banner')->delete();
+        $banner = [
+            [
+                'image' => 'images/master/hom1.JPG',
+                'label' => 'Lorem Ipsum is simply',
+                'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+                'urutan' => 1,
+                'status' => '1'
+            ],
+            [
+                'image' => 'images/master/hom2.JPG',
+                'label' => 'Lorem Ipsum is simply',
+                'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+                'urutan' => 2,
+                'status' => '1'
+            ],
+            [
+                'image' => 'images/master/hom3.JPG',
+                'label' => 'Lorem Ipsum is simply',
+                'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+                'urutan' => 3,
+                'status' => '1'
+            ],
+        ];
+        foreach ($banner as $b) {
+            Banner::create($b);
         }
     }
 }

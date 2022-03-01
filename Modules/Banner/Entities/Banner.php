@@ -69,7 +69,7 @@ class Banner extends Model
     public function scopeLandingHome($query)
     {
 
-        $q = $query->select()->where('status','1')->orderby('updated_at','desc')->paginate(4);
+        $q = $query->select()->where('status','1')->orderby('urutan','desc')->get();
           
         return $q;
     }
