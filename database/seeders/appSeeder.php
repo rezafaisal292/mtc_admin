@@ -13,6 +13,7 @@ use Modules\Profile\Entities\Profile;
 use Modules\Services\Entities\Services;
 use Illuminate\Support\Str;
 use Modules\Banner\Entities\Banner;
+use Modules\Client\Entities\Client;
 
 class appSeeder extends Seeder
 {
@@ -337,6 +338,31 @@ class appSeeder extends Seeder
         ];
         foreach ($banner as $b) {
             Banner::create($b);
+        }
+        
+        DB::table('app_client')->delete();
+        $client = [
+            [
+                'image' => 'images/master/traveloka.png',
+                'label' => 'Lorem Ipsum is simply',
+                'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+                'status' => '1'
+            ], [
+                'image' => 'images/master/tokopedia.png',
+                'label' => 'Lorem Ipsum is simply',
+                'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+                'status' => '1'
+            ],
+            [
+                'image' => 'images/master/gojek.png',
+                'label' => 'Lorem Ipsum is simply',
+                'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+                'status' => '1'
+            ],
+           
+        ];
+        foreach ($client as $c) {
+            Client::create($c);
         }
     }
 }

@@ -17,7 +17,7 @@ $segment = request()->segment(1);
       <div class="card-header">
         <div class="row">
           <div class="col-md-6" style="text-align:left">
-             {{-- Total Data : {{$data->total()}}  --}}
+             Total Data : {{$data->total()}} 
           </div>
          
         </div>
@@ -28,17 +28,24 @@ $segment = request()->segment(1);
           <thead>
             <tr>
               <th>Aksi</th>
+              <th>Image</th>
+              <th>Label</th>
+              <th>Descp</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-             {{-- @foreach ($data as $d)
+             @foreach ($data as $d)
             <tr>
               <td>
               @include('master-component.button-edit-delete')
               </td>
-              
+              <td><img src="{{asset($d->image)}}" width="30%"></td>
+              <td>{{$d->label}}</td>
+              <td>{{$d->descp}}</td>
+              <td>{{$status[$d->status]}}</td>
             </tr>
-            @endforeach  --}}
+            @endforeach 
           </tbody>
         </table>
       </div>
@@ -48,7 +55,7 @@ $segment = request()->segment(1);
         <div class="row">
           <div class="col-6">
 
-            {{-- {{ $data->links() }} --}}
+            {{ $data->links() }}
           </div>
           <div class="col-6 text-right">
            

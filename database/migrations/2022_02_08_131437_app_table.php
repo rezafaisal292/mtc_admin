@@ -98,7 +98,7 @@ class AppTable extends Migration
             $table->string('label',30)->nullable();
             $table->string('descp',100)->nullable();
             $table->integer('urutan');
-            $table->char('status');
+            $table->char('status',1);
             $table->timestamps();
         });
         Schema::create('app_sosmed', function (Blueprint $table) {
@@ -106,7 +106,7 @@ class AppTable extends Migration
             $table->string('image',100)->nullable();
             $table->string('label',30)->nullable();
             $table->uuid('member')->nullable();
-            $table->char('status');
+            $table->char('status',1);
             $table->timestamps();
         });
         Schema::create('app_client', function (Blueprint $table) {
@@ -114,7 +114,7 @@ class AppTable extends Migration
             $table->string('image',100)->nullable();
             $table->string('label',30)->nullable();
             $table->string('descp',100)->nullable();
-            $table->char('status');
+            $table->char('status',1);
             $table->timestamps();
         });
 

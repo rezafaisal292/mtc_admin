@@ -5,6 +5,8 @@ namespace Modules\Client\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\File;
+use Modules\Client\Entities\Client;
 
 class ClientController extends Controller
 {
@@ -14,7 +16,8 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        return view('client::index');
+        $data=Client::fetch($request);
+        return view('client::index',compact('data'));
     }
 
     /**
@@ -23,7 +26,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('client::form');
+        $d= new Client();
+        return view('client::form',compact('d'));
     }
 
     /**
@@ -33,8 +37,37 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('client');
+        Client::create($request->only( 'label', 'descp','status'));
+        if ($request->file('images')) {
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/client';
+
+            $id = Client::FindByLabel($request->label)->id;
+
+            $nameFile = $id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $imageDir =  $tujuan_upload . '/' . $nameFile;
+            Client::find($id)->update(['image' => $imageDir]);
+        }
+
+        return redirect('client')->with(['success' => '`' . $request->label . '` Berhasil disimpan']);
     }
 
     /**
@@ -52,9 +85,10 @@ class ClientController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        return view('client::edit');
+        $d=$client;
+        return view('client::form',compact('d'));
     }
 
     /**
@@ -63,10 +97,52 @@ class ClientController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        //
-        return redirect('client');
+        if ($request->file('images')) {
+            // $validator = Validator::make($request->all(), [
+            //     'file' => 'max:500000',
+            // ]);
+            $request->validate([
+                'images' => 'max:1024',
+            ]);
+
+            $image_old = $client->image;  // Value is not URL but directory file path
+            if ($image_old != null) {
+                if (File::exists($image_old)) {
+                    File::delete($image_old);
+                }
+            }
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            // $image->getMimeType();    
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/client';
+
+
+            $nameFile = $client->id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $request['image'] =  $tujuan_upload . '/' . $nameFile;
+
+            $client->update($request->only( 'label','image', 'descp','status'));
+        } else {
+            $client->update($request->only( 'label', 'descp','status'));
+        }
+        return redirect('client')->with(['success' => '`' . $request->label . '` Berhasil diubah']);
     }
 
     /**
@@ -74,10 +150,16 @@ class ClientController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        //
+        $name = $client->label;
+        $image_old = $client->image;  // Value is not URL but directory file path
+        if (File::exists($image_old)) {
+            File::delete($image_old);
+        }
+        
+        $client->delete();
 
-        return redirect('client');
+        return redirect('client')->with(['success' => '`' . $name . '` Berhasil dihapus']);
     }
 }
