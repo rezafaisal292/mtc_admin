@@ -17,7 +17,22 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['sosm
     </div>
     <div class="card-body">
         <div class="form-group row">
-            
+            <div class="col-md-6">
+                {{ Form::fgText('Label', 'label', $d->label, ['class' => 'form-control'], null, 'text', true) }}
+                {{ Form::fgSelect('Member', 'member', $member,$d->member, ['class' => 'form-control'], null, 'text', true) }}
+             
+                <div class="form-group">
+                    <b>File Gambar</b><br />
+
+                    <input type="file" name="images">
+                    @if ($d->image != null)
+                        <img src="{{ asset($d->image) }}" width="30%">
+                    @endif
+                </div>
+            </div> {{ Form::fgSelect('Status', 'status',$status ,$d->status, ['class' => 'form-control'], null, 'text', true) }}
+
+
+           
         </div>
     </div>
 

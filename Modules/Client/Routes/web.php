@@ -11,7 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('client', 'ClientController');
+    Route::post('client/filter', 'ClientController@index');
     });

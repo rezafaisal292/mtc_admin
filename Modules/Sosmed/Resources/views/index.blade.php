@@ -19,15 +19,7 @@ $segment = request()->segment(1);
           <div class="col-md-6" style="text-align:left">
              {{-- Total Data : {{$data->total()}}  --}}
           </div>
-          <div class="col-md-6" style="text-align:right">
-            <button type="submit" class="btn btn-success btn-sm">
-              <i class="fas fa-file-excel"></i>&nbsp; Export XLS
-            </button>
-            &nbsp;
-            <button type="submit" class="btn btn-danger btn-sm">
-              <i class="fas fa-file-excel"></i>&nbsp; Export PDF
-            </button>
-          </div>
+          
         </div>
       </div>
       <!-- /.card-header -->
@@ -36,17 +28,25 @@ $segment = request()->segment(1);
           <thead>
             <tr>
               <th>Aksi</th>
+              <th>Image</th>
+              <th>Label</th>
+              <th>Member</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-             {{-- @foreach ($data as $d)
+             @foreach ($data as $d)
             <tr>
               <td>
               @include('master-component.button-edit-delete')
               </td>
-              
+              <td><img src="{{asset($d->image)}}" width="5%"></td>
+              <td>{{$d->label}}</td>
+              <td>{{$d->descp}}</td>
+              <td>{{$d->members->name}}</td>
+              <td>{{$status[$d->status]}}</td>
             </tr>
-            @endforeach  --}}
+            @endforeach 
           </tbody>
         </table>
       </div>
@@ -56,7 +56,7 @@ $segment = request()->segment(1);
         <div class="row">
           <div class="col-6">
 
-            {{-- {{ $data->links() }} --}}
+            {{ $data->links() }}
           </div>
           <div class="col-6 text-right">
            

@@ -40,16 +40,6 @@ class Banner extends Model
         if($request->label)
             $query->where('label','like','%'.$request->label.'%');
 
-        if($request->member)
-            $query->where('member',$request->member);
-
-        if($request->services)
-            $query->where('services',$request->services);
-
-
-        if($request->tipe_produk)
-        $query->where('tipe_produk',$request->tipe_produk);
-
         if($request->status)
         $query->where('status',$request->status);
 

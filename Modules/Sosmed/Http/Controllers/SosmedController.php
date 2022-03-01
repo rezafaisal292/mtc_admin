@@ -5,6 +5,8 @@ namespace Modules\Sosmed\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Member\Entities\Member;
+use Modules\Sosmed\Entities\Sosmed;
 
 class SosmedController extends Controller
 {
@@ -14,7 +16,8 @@ class SosmedController extends Controller
      */
     public function index(Request $request)
     {
-        return view('sosmed::index');
+        $data= Sosmed::fetch($request);
+        return view('sosmed::index',compact('data'));
     }
 
     /**
@@ -23,7 +26,9 @@ class SosmedController extends Controller
      */
     public function create()
     {
-        return view('sosmed::form');
+        $member=Member::LandingHome();
+        $d=new Sosmed;
+        return view('sosmed::form',compact('d','member'));
     }
 
     /**

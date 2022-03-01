@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Client\Entities;
+namespace Modules\Sosmed\Entities;
 
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Member\Entities\Member;
 
-class Client extends Model
+class Sosmed extends Model
 {
 	use Uuids;
 
@@ -19,11 +20,11 @@ class Client extends Model
         'id',
         'image',
         'label',
-        'descp',
+        'member',
         'status',
         
     ];
-    protected $table = 'app_client';
+    protected $table = 'app_sosmed';
 
 	protected 	$primaryKey = 'id';
     /**
@@ -66,6 +67,11 @@ class Client extends Model
     public function scopeFindByLabel($query, string $value)
     {
         return $query->where('label', $value)->first();
+    }
+
+    public function members()
+    {
+        return $this->hasOne(Member::class,'id','member');
     }
 
 }
