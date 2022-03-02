@@ -5,7 +5,7 @@ namespace Modules\Sosmed\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Member\Entities\Member;
+use Illuminate\Support\Facades\File;
 use Modules\Sosmed\Entities\Sosmed;
 
 class SosmedController extends Controller
@@ -26,9 +26,8 @@ class SosmedController extends Controller
      */
     public function create()
     {
-        $member=Member::LandingHome();
         $d=new Sosmed;
-        return view('sosmed::form',compact('d','member'));
+        return view('sosmed::form',compact('d'));
     }
 
     /**
@@ -38,8 +37,38 @@ class SosmedController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('sosmed');
+        Sosmed::create($request->only( 'name'));
+        if ($request->file('images')) {
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/sosmed';
+
+            $id = Sosmed::FindByLabel($request->label)->id;
+
+            $nameFile = $id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $imageDir =  $tujuan_upload . '/' . $nameFile;
+            Sosmed::find($id)->update(['image' => $imageDir]);
+        }
+
+        return redirect('sosmed')->with(['success' => '`' . $request->name . '` Berhasil disimpan']);
+    
     }
 
     /**
@@ -57,9 +86,10 @@ class SosmedController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Sosmed $sosmed)
     {
-        return view('sosmed::edit');
+        $d=$sosmed;
+        return view('sosmed::form',compact('d'));
     }
 
     /**
@@ -68,10 +98,52 @@ class SosmedController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Sosmed $sosmed)
     {
-        //
-        return redirect('sosmed');
+        if ($request->file('images')) {
+            // $validator = Validator::make($request->all(), [
+            //     'file' => 'max:500000',
+            // ]);
+            $request->validate([
+                'images' => 'max:1024',
+            ]);
+
+            $image_old = $sosmed->image;  // Value is not URL but directory file path
+            if ($image_old != null) {
+                if (File::exists($image_old)) {
+                    File::delete($image_old);
+                }
+            }
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            // $image->getMimeType();    
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/sosmed';
+
+
+            $nameFile = $sosmed->id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $request['image'] =  $tujuan_upload . '/' . $nameFile;
+
+            $sosmed->update($request->only( 'name','image'));
+        } else {
+            $sosmed->update($request->only( 'name'));
+        }
+        return redirect('sosmed')->with(['success' => '`' . $request->name . '` Berhasil diubah']);
     }
 
     /**
@@ -79,10 +151,16 @@ class SosmedController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Sosmed $sosmed)
     {
-        //
+        $name = $sosmed->label;
+        $image_old = $sosmed->image;  // Value is not URL but directory file path
+        if (File::exists($image_old)) {
+            File::delete($image_old);
+        }
+        
+        $sosmed->delete();
 
-        return redirect('sosmed');
+        return redirect('sosmed')->with(['success' => '`' . $name . '` Berhasil dihapus']);
     }
 }

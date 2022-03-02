@@ -10,7 +10,7 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['sosm
 @section('content_header')
 <h1 class="m-0 text-dark">Sosmed</h1>
 @stop
-{{ Form::open(['route' => $action, 'method' => $method, 'class' => 'form-horizontal form-data', 'autocomplete' => 'off']) }}
+{{ Form::open(['route' => $action, 'method' => $method, 'class' => 'form-horizontal form-data', 'autocomplete' => 'off','enctype' => 'multipart/form-data']) }}
 <div class="card card-primary">
     <div class="card-header">
         {{$title}} Data Sosmed
@@ -18,9 +18,7 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['sosm
     <div class="card-body">
         <div class="form-group row">
             <div class="col-md-6">
-                {{ Form::fgText('Label', 'label', $d->label, ['class' => 'form-control'], null, 'text', true) }}
-                {{ Form::fgSelect('Member', 'member', $member,$d->member, ['class' => 'form-control'], null, 'text', true) }}
-             
+                {{ Form::fgText('Nama', 'name', $d->name, ['class' => 'form-control'], null, 'text', true) }}
                 <div class="form-group">
                     <b>File Gambar</b><br />
 
@@ -29,7 +27,7 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['sosm
                         <img src="{{ asset($d->image) }}" width="30%">
                     @endif
                 </div>
-            </div> {{ Form::fgSelect('Status', 'status',$status ,$d->status, ['class' => 'form-control'], null, 'text', true) }}
+            </div> 
 
 
            

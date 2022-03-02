@@ -104,9 +104,14 @@ class AppTable extends Migration
         Schema::create('app_sosmed', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('image',100)->nullable();
-            $table->string('label',30)->nullable();
-            $table->uuid('member')->nullable();
-            $table->char('status',1);
+            $table->string('name',100)->nullable();
+            $table->timestamps();
+        });
+        Schema::create('app_member_sosmed', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('url',30)->nullable();
+            $table->uuid('sosmed');
+            $table->uuid('member');
             $table->timestamps();
         });
         Schema::create('app_client', function (Blueprint $table) {

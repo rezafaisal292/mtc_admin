@@ -3,14 +3,14 @@ $segment = request()->segment(1);
 @endphp
 @extends('adminlte::page')
 
-@section('title', env('APP_NAME').'::Sosmed')
+@section('title', env('APP_NAME').'::Membersosmed')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Sosmed</h1>
+    <h1 class="m-0 text-dark">Membersosmed</h1>
 @stop
 
 @section('content')
-@include('sosmed::filter')
+@include('membersosmed::filter')
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -19,7 +19,15 @@ $segment = request()->segment(1);
           <div class="col-md-6" style="text-align:left">
              {{-- Total Data : {{$data->total()}}  --}}
           </div>
-          
+          <div class="col-md-6" style="text-align:right">
+            <button type="submit" class="btn btn-success btn-sm">
+              <i class="fas fa-file-excel"></i>&nbsp; Export XLS
+            </button>
+            &nbsp;
+            <button type="submit" class="btn btn-danger btn-sm">
+              <i class="fas fa-file-excel"></i>&nbsp; Export PDF
+            </button>
+          </div>
         </div>
       </div>
       <!-- /.card-header -->
@@ -27,21 +35,18 @@ $segment = request()->segment(1);
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <th class="col-md-4">Aksi</th>
-              <th class="col-md-4">Image</th>
-              <th class="col-md-4">Nama</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-             @foreach ($data as $d)
+             {{-- @foreach ($data as $d)
             <tr>
               <td>
               @include('master-component.button-edit-delete')
               </td>
-              <td><img src="{{asset($d->image)}}" width="5%"></td>
-              <td>{{$d->name}}</td>
+              
             </tr>
-            @endforeach 
+            @endforeach  --}}
           </tbody>
         </table>
       </div>
@@ -51,7 +56,6 @@ $segment = request()->segment(1);
         <div class="row">
           <div class="col-6">
 
-            {{ $data->links() }}
           </div>
           <div class="col-6 text-right">
            

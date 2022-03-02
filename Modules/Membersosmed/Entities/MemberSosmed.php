@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Sosmed\Entities;
+namespace Modules\Membersosmed\Entities;
 
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Modules\Member\Entities\Member;
+use Modules\Produk\Entities\Produk;
 
-class Sosmed extends Model
+class MemberSosmed extends Model
 {
 	use Uuids;
 
@@ -18,10 +18,12 @@ class Sosmed extends Model
      */
     protected $fillable = [
         'id',
-        'image',
-        'name',
+        'url',
+        'sosmed',
+        'member',
+        
     ];
-    protected $table = 'app_sosmed';
+    protected $table = 'app_member_sosmed';
 
 	protected 	$primaryKey = 'id';
     /**
@@ -34,8 +36,13 @@ class Sosmed extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
-        if($request->name)
-            $query->where('name','ilike','%'.$request->name.'%');
+        if($request->label)
+            $query->where('label','like','%'.$request->label.'%');
+
+        if($request->id_produk)
+            $query->where('id_produk',$request->id_produk);
+
+
 
 
         $q = $query->select();
@@ -47,13 +54,13 @@ class Sosmed extends Model
 
             return $q->paginate(10);
         }
-        return $q->get();
+        return $q->orderby('id_produk','asc')->get();
     }
 
     public function scopeLandingHome($query)
     {
 
-        $q = $query->select()->where('status','1')->orderby('urutan','desc')->get();
+        $q = $query->select()->where('status','1')->orderby('updated_at','desc')->paginate(4);
           
         return $q;
     }
@@ -63,9 +70,10 @@ class Sosmed extends Model
         return $query->where('label', $value)->first();
     }
 
-    public function members()
+    public function produk()
     {
-        return $this->hasOne(Member::class,'id','member');
+        return $this->hasOne(Produk::class,'id','id_produk');
     }
+
 
 }

@@ -14,6 +14,7 @@ use Modules\Services\Entities\Services;
 use Illuminate\Support\Str;
 use Modules\Banner\Entities\Banner;
 use Modules\Client\Entities\Client;
+use Modules\Membersosmed\Entities\MemberSosmed;
 use Modules\Sosmed\Entities\Sosmed;
 
 class appSeeder extends Seeder
@@ -62,8 +63,12 @@ class appSeeder extends Seeder
                 ],
             ],
             [
+                'id' => Uuid::uuid4(), 'nama' => 'Sosmed', 'url' => 'sosmed', 'icon' => 'fas fa-fw fa-wifi', 'parent' => null,
+                'urutan' => 7, 'status' => '1', 'childs' => []
+            ],
+            [
                 'id' => Uuid::uuid4(), 'nama' => 'Data Member', 'url' => '#', 'icon' => 'fas fa-fw fa-id-card', 'parent' => null,
-                'urutan' => 7, 'status' => '1', 'childs' => [
+                'urutan' => 8, 'status' => '1', 'childs' => [
                     [
                         'id' => Uuid::uuid4(),
                         'nama' => 'Member',
@@ -83,12 +88,18 @@ class appSeeder extends Seeder
                         'status' => '1',
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
+                    ],
+                    [
+                        'id' => Uuid::uuid4(),
+                        'nama' => 'Member Sosmed',
+                        'url' => 'membersosmed',
+                        'icon' => null,
+                        'urutan' => 3,
+                        'status' => '1',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
                     ]
                 ]
-            ],
-            [
-                'id' => Uuid::uuid4(), 'nama' => 'Sosmed', 'url' => 'sosmed', 'icon' => 'fas fa-fw fa-wifi', 'parent' => null,
-                'urutan' => 8, 'status' => '1', 'childs' => []
             ],
             [
                 'id' => Uuid::uuid4(), 'nama' => 'Banner', 'url' => 'banner', 'icon' => 'fas fa-fw fa-images', 'parent' => null,
@@ -370,33 +381,44 @@ class appSeeder extends Seeder
         $sosmed = [
             [
                 'image' => 'images/master/spotify.png',
-                'label' => 'Lorem Ipsum is simply',
-                'member' => Member::where('name','J25')->first()->id,
-                'status' => '1'
-            ], 
-            [
-                'image' => 'images/master/spotify.png',
-                'label' => 'Lorem Ipsum is simply',
-                'member' => Member::where('name','Hyper')->first()->id,
-                'status' => '1'
-            ], 
-            [
-                'image' => 'images/master/spotify.png',
-                'label' => 'Lorem Ipsum is simply',
-                'member' => Member::where('name','Marinosh')->first()->id,
-                'status' => '1'
-            ], 
-            [
-                'image' => 'images/master/spotify.png',
-                'label' => 'Lorem Ipsum is simply',
-                'member' => Member::where('name','MTC')->first()->id,
-                'status' => '1'
+                'name' => 'Spotify',
             ], 
            
            
         ];
         foreach ($sosmed as $s) {
             Sosmed::create($s);
+        }
+        DB::table('app_member_sosmed')->delete();
+        $member_sosmed = [
+            [
+              
+                'url' => 'asdasdad',
+                'sosmed' => Sosmed::where('name','Spotify')->first()->id,
+                'member' => Member::where('name','J25')->first()->id,
+            ], 
+            [
+               
+                'url' => 'asdasdad',
+                'sosmed' => Sosmed::where('name','Spotify')->first()->id,
+                'member' => Member::where('name','Hyper')->first()->id,
+            ], 
+            [
+             
+                'url' => 'asdasdad',
+                'sosmed' => Sosmed::where('name','Spotify')->first()->id,
+                'member' => Member::where('name','Marinosh')->first()->id,
+            ], 
+            [
+                'url' => 'asdasdad',
+                'sosmed' => Sosmed::where('name','Spotify')->first()->id,
+                'member' => Member::where('name','MTC')->first()->id,
+            ], 
+           
+           
+        ];
+        foreach ($member_sosmed as $ms) {
+            MemberSosmed::create($ms);
         }
 
     }

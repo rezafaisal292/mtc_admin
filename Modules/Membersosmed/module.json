@@ -1,0 +1,13 @@
+{
+    "name": "Membersosmed",
+    "alias": "membersosmed",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Membersosmed\\Providers\\MembersosmedServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
