@@ -10,18 +10,77 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12">
+                    <h3 class="light black-text ">Services</h3>
+                    <div class="progress">
+                        <div class="determinate" style="width: 100%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <ul id="tabs-swipe-demo" class="tabs">
+                                @foreach ($services as $s)
+                                    <li class="tab col s3 ">
+                                        <a href="#{{ $s->id }}">
+                                            <b>{{ $s->label }}</b>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            @foreach ($services as $s)
+                                <div id="{{ $s->id }}" class="col s12 ">
+                                    <br>
+                                    <h5>{{ $s->label }}</h5>
+                                    {!! $s->descp !!}
+                                    <br>
 
-                    <ul id="tabs-swipe-demo" class="tabs">
-                        <li class="tab col s3"><a href="#test-swipe-1">Test 1</a></li>
-                        <li class="tab col s3"><a href="#test-swipe-2">Test 2</a></li>
-                        <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
-                    </ul>
+                                    <h5>Produk</h5>
+                                    <div class="progress">
+                                        <div class="determinate" style="width: 100%"></div>
+                                    </div>
+                                    @if (count($s->produks) > 0)
+                                        @foreach ($s->produks as $sp)
+                                            <div class="row">
+                                                <div class="col s12 m3">
+                                                    @if ($sp->url != null)
+                                                        <iframe width="230" height="200" src="{{ $sp->url }}"
+                                                            title="YouTube video player" frameborder="0"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowfullscreen></iframe>
+                                                    @else
+                                                        @if ($sp->image != null)
+                                                            <img src="{{ asset($pr->image) }}" width="230">
+                                                        @endif
+                                                    @endif
+                                                </div>
 
-                    <div id="test-swipe-1" class="col s12 blue">Test 1</div>
-                    <div id="test-swipe-2" class="col s12 red">Test 2</div>
-                    <div id="test-swipe-3" class="col s12 green">Test 3</div>
+                                                <div class="col s12 m9">
+                                                    <b>{{ $sp->label }}</b>
+                                                    <p>
+                                                        @php
+                                                            $string = strip_tags($sp->descp);
+                                                            if (strlen($string) > 100) {
+                                                                // truncate string
+                                                                $stringCut = substr($string, 0, 100);
+                                                                $endPoint = strrpos($stringCut, ' ');
+                                                            
+                                                                //if the string doesn't contain any space then it will cut without word basis.
+                                                                $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                                $string .= '... <a href="/this/story">Read More</a>';
+                                                            }
+                                                            echo $string;
+                                                        @endphp
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        @endforeach
+                                        @else
+                                        
+                                        Data produk tidak ada
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
     </section>
 @stop

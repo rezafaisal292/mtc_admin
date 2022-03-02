@@ -50,10 +50,10 @@ class Sosmed extends Model
         return $q->get();
     }
 
-    public function scopeLandingHome($query)
+    public function scopeLanding($query)
     {
 
-        $q = $query->select()->where('status','1')->orderby('urutan','desc')->get();
+        $q = $query->select()->orderby('name','desc')->get();
           
         return $q;
     }

@@ -5,7 +5,8 @@ namespace Modules\Membersosmed\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Modules\Produk\Entities\Produk;
+use Modules\Member\Entities\Member;
+use Modules\Sosmed\Entities\Sosmed;
 
 class MemberSosmed extends Model
 {
@@ -36,16 +37,13 @@ class MemberSosmed extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
-        if($request->label)
-            $query->where('label','like','%'.$request->label.'%');
+        if($request->member)
+            $query->where('member',$request->member);
 
-        if($request->id_produk)
-            $query->where('id_produk',$request->id_produk);
+        if($request->member)
+        $query->where('sosmed',$request->member);
 
-
-
-
-        $q = $query->select();
+        $q = $query->select()->orderby('member');
                  
         if ($export === false) {
             if ($request->has('per_page')) {
@@ -54,7 +52,7 @@ class MemberSosmed extends Model
 
             return $q->paginate(10);
         }
-        return $q->orderby('id_produk','asc')->get();
+        return $q->orderby('member')->get();
     }
 
     public function scopeLandingHome($query)
@@ -70,9 +68,13 @@ class MemberSosmed extends Model
         return $query->where('label', $value)->first();
     }
 
-    public function produk()
+    public function members()
     {
-        return $this->hasOne(Produk::class,'id','id_produk');
+        return $this->hasOne(Member::class,'id','member');
+    }
+    public function sosmeds()
+    {
+        return $this->hasOne(Sosmed::class,'id','sosmed');
     }
 
 

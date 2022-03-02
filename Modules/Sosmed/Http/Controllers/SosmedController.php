@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
+use Modules\Member\Entities\Member;
+use Modules\Membersosmed\Entities\MemberSosmed;
 use Modules\Sosmed\Entities\Sosmed;
 
 class SosmedController extends Controller
@@ -158,7 +160,7 @@ class SosmedController extends Controller
         if (File::exists($image_old)) {
             File::delete($image_old);
         }
-        
+        MemberSosmed::where('sosmed',$sosmed->id)->first()->delete();
         $sosmed->delete();
 
         return redirect('sosmed')->with(['success' => '`' . $name . '` Berhasil dihapus']);

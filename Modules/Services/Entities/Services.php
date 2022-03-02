@@ -5,6 +5,7 @@ namespace Modules\Services\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Produk\Entities\Produk;
 
 class Services extends Model
 {
@@ -60,6 +61,11 @@ class Services extends Model
     public function scopeFindByName($query, string $value)
     {
         return $query->where('label', $value)->first();
+    }
+
+     public function produks()
+    {
+        return $this->hasMany(Produk::class,'services','id')->orderBy('label');
     }
 
 }
