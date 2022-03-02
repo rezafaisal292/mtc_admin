@@ -298,6 +298,22 @@ if (!function_exists('monthName')) {
     }
 }
 
+
+if (!function_exists('formatDate')) {
+    /**
+     * @param int $month
+     * @param string $format
+     * @param string|null $locale
+     * @return string
+     */
+    function formatDate(string $dateTime)
+    {
+        $date = date_create($dateTime);
+        $format= date_format($date, 'd-M-Y H:i:s');
+        return $format;
+    }
+}
+
 if (!function_exists('numberToRoman')) {
     /**
      * @param int $number

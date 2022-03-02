@@ -41,6 +41,7 @@ $segment = request()->segment(1);
               <th>Label</th>
               <th>Descp</th>
               <th>Status</th>
+              <th>Timestamp</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +54,7 @@ $segment = request()->segment(1);
               <td>{{$d->label}}</td>
               <td>{{substr($d->descp,0,50)}}</td>
               <td>{{$status[$d->status]}}</td>
+              <td>{{formatDate($d->updated_at)}}</td>
             </tr>
             @endforeach 
           </tbody>

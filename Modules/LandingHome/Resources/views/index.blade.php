@@ -10,29 +10,29 @@
     <!-- slider -->
     <div class="slider">
         <ul class="slides">
-            @foreach($banner as $b)
-            <li>
-                <img src="{{ asset($b->image) }}">
-                <div class="caption {{$alignSlide}}">
-                    <h3>{{$b->label}}</h3>
-                    <h5 class="light grey-text text-lighten-3">{{$b->descp}}</h5>
-                </div>
-            </li>
-            @if($alignSlide == 'left-align')
-            @php $alignSlide ='center-align' @endphp
-            @elseif( $alignSlide =='center-align')
-            @php $alignSlide ='right-align' @endphp 
-            @elseif( $alignSlide =='right-align')
-            @php $alignSlide ='left-align' @endphp
-            @else
-            @endif
+            @foreach ($banner as $b)
+                <li>
+                    <img src="{{ asset($b->image) }}">
+                    <div class="caption {{ $alignSlide }}">
+                        <h3>{{ $b->label }}</h3>
+                        <h5 class="light grey-text text-lighten-3">{{ $b->descp }}</h5>
+                    </div>
+                </li>
+                @if ($alignSlide == 'left-align')
+                    @php $alignSlide ='center-align' @endphp
+                @elseif($alignSlide == 'center-align')
+                    @php $alignSlide ='right-align' @endphp
+                @elseif($alignSlide == 'right-align')
+                    @php $alignSlide ='left-align' @endphp
+                @else
+                @endif
             @endforeach
-           
+
         </ul>
     </div>
 
     <section id="services" class="services scrollspy">
-     
+
         <div class="container">
             <h3 class="light black-text ">Profile</h3>
             <div class="row">
@@ -40,19 +40,20 @@
                     <div class="progress">
                         <div class="determinate" style="width: 100%"></div>
                     </div>
-                        @php
-                            $string = strip_tags($profile->descp);
-                            if (strlen($string) > 1000) {
-                                // truncate string
-                                $stringCut = substr($string, 0, 1000);
-                                $endPoint = strrpos($stringCut, ' ');
-                            
-                                //if the string doesn't contain any space then it will cut without word basis.
-                                $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                $string .= '... <a href="/this/story">Read More</a>';
-                            }
-                            echo $string;
-                        @endphp
+                    @php
+                        $string = strip_tags($profile->descp);
+                        if (strlen($string) > 1000) {
+                            // truncate string
+                            $stringCut = substr($string, 0, 1000);
+                            $endPoint = strrpos($stringCut, ' ');
+                        
+                            //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                            $string .= '... <a href="/this/story">Read More</a>';
+                        }
+                        
+                    @endphp
+                    {!! $string !!}
                 </div>
             </div>
         </div>
@@ -73,7 +74,7 @@
                             {!! $s->icon !!}
                             <br>
                             <b>{{ $s->label }}</b>
-                            <p>
+                            <br>
                                 @php
                                     $string = strip_tags($s->descp);
                                     if (strlen($string) > 100) {
@@ -85,9 +86,9 @@
                                         $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
                                         $string .= '... <a href="/this/story">Read More</a>';
                                     }
-                                    echo $string;
+                                   
                                 @endphp
-                            </p>
+                            {!! $string !!} 
                         </div>
                     </div>
                 @endforeach
@@ -120,22 +121,20 @@
                             @endif
 
                             <b>{{ $pr->label }}</b>
-                            <p>
-                                @php
-                                    $string = strip_tags($pr->descp);
-                                    if (strlen($string) > 100) {
-                                        // truncate string
-                                        $stringCut = substr($string, 0, 100);
-                                        $endPoint = strrpos($stringCut, ' ');
-                                    
-                                        //if the string doesn't contain any space then it will cut without word basis.
-                                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                        $string .= '... <a href="/this/story">Read More</a>';
-                                    }
-                                    echo $string;
-                                @endphp
-                            </p>
 
+                            @php
+                                $string = strip_tags($pr->descp);
+                                if (strlen($string) > 100) {
+                                    // truncate string
+                                    $stringCut = substr($string, 0, 100);
+                                    $endPoint = strrpos($stringCut, ' ');
+                                
+                                    //if the string doesn't contain any space then it will cut without word basis.
+                                    $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                    $string .= '... <a href="/this/story">Read More</a>';
+                                }
+                            @endphp
+                            {!! $string !!}
                         </div>
                     @endforeach
                 @endif
