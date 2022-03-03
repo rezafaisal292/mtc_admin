@@ -5,6 +5,8 @@ namespace Modules\Produk\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Member\Entities\Member;
+use Modules\Services\Entities\Services;
 
 class Produk extends Model
 {
@@ -72,14 +74,31 @@ class Produk extends Model
     public function scopeLandingHome($query)
     {
 
-        $q = $query->select()->where('status','1')->orderby('updated_at','desc')->paginate(4);
+        $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('updated_at','desc')->paginate(4);
           
         return $q;
     }
+
+    public function scopeLandingProduk($query)
+    {
+        $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('updated_at','desc')->paginate(10);  
+        return $q;
+    }
+
 
     public function scopeFindByLabel($query, string $value)
     {
         return $query->where('label', $value)->first();
     }
+
+    public function members()
+    {
+        return $this->hasOne(Member::class,'id','member');
+    }
+    public function service()
+    {
+        return $this->hasOne(Services::class,'id','services');
+    }
+
 
 }

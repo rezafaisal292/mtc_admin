@@ -49,7 +49,7 @@
                         
                             //if the string doesn't contain any space then it will cut without word basis.
                             $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                            $string .= '... <a href="/this/story">Read More</a>';
+                            $string .= '... <a href=' . url('landingprofile') . '>Read More</a>';
                         }
                         
                     @endphp
@@ -75,20 +75,20 @@
                             <br>
                             <b>{{ $s->label }}</b>
                             <br>
-                                @php
-                                    $string = strip_tags($s->descp);
-                                    if (strlen($string) > 100) {
-                                        // truncate string
-                                        $stringCut = substr($string, 0, 100);
-                                        $endPoint = strrpos($stringCut, ' ');
-                                    
-                                        //if the string doesn't contain any space then it will cut without word basis.
-                                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                        $string .= '... <a href="/this/story">Read More</a>';
-                                    }
-                                   
-                                @endphp
-                            {!! $string !!} 
+                            @php
+                                $string = strip_tags($s->descp);
+                                if (strlen($string) > 100) {
+                                    // truncate string
+                                    $stringCut = substr($string, 0, 100);
+                                    $endPoint = strrpos($stringCut, ' ');
+                                
+                                    //if the string doesn't contain any space then it will cut without word basis.
+                                    $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                    $string .= '... <a href="/this/story">Read More</a>';
+                                }
+                                
+                            @endphp
+                            {!! $string !!}
                         </div>
                     </div>
                 @endforeach
@@ -144,9 +144,31 @@
     <footer class="black">
     </footer>
     <section id="services" class="services scrollspy">
+        <a href="services.html">
+            <h3 class="light black-text center">Our Client</h3>
+        </a>
+        <div class="row ">
+
+            <div class="col m12 s12 center">
+                <div class="row">
+            @if (count($client) > 0)
+                @foreach ($client as $c)
+                    @if ($c->image != null)
+                            <img src="{{ asset($c->image) }}" width="15%"> &nbsp; &nbsp; &nbsp;
+                    @endif
+                @endforeach
+            @endif
+                </div>
+            </div>
+    </section>
+
+
+    <footer class="black">
+    </footer>
+    <section id="services" class="services scrollspy">
         <div class="container">
             <a href="services.html">
-                <h3 class="light black-text center">Our Member</h3>
+                <h3 class="light black-text ">Our Member</h3>
             </a>
             <div class="row">
 
@@ -159,9 +181,6 @@
                         @endif
                     @endforeach
                 @endif
-            </div>
-            <div class="row">
-
             </div>
     </section>
 

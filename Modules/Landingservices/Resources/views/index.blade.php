@@ -2,7 +2,7 @@
 @section('title', $profile->name . '::Services')
 
 
-@include('landingservices::navbar')
+@include('landinghome::navbar')
 
 @section('content')
 
@@ -53,8 +53,15 @@
                                                 </div>
 
                                                 <div class="col s12 m9">
-                                                    <b>{{ $sp->label }}</b>
-                                                    <p>
+                                                    <div class="row">
+                                                        <div class="col s12 m9">
+                                                            <b>{{ $sp->label }}</b>
+                                                        </div>
+                                                        <div class="col s12 m3">
+                                                            <i>{{ formatDate($sp->updated_at) }}</i>
+                                                        </div>
+                                                    </div>
+                                                    
                                                         @php
                                                             $string = strip_tags($sp->descp);
                                                             if (strlen($string) > 100) {
@@ -66,9 +73,19 @@
                                                                 $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
                                                                 $string .= '... <a href="/this/story">Read More</a>';
                                                             }
-                                                            echo $string;
                                                         @endphp
-                                                    </p>
+                                                   {!!$string!!}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 m6 ">
+                                                    <i><b>{{ !$sp->service ? '' : $sp->service->label . ',' }}</b></i>
+                                                    &nbsp;
+                                                    <i>{{ !$sp->members ? '' : $sp->members->name }}</i>
+                                                </div>
+                                                <div class="col s12 m6 right">
+                                                    <a href="{{ url('landingproduk/' . $sp->id) }}" class="right">Lihat
+                                                        Selengkapnya</a>
                                                 </div>
                                             </div>
                                             <hr>

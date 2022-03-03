@@ -49,8 +49,8 @@ $segment = request()->segment(1);
               <td>{{$d->image}}</td>
               <td>{{$d->label}}</td>
               <td>{{substr($d->descp,0,30)}}</td>
-              <td>{{$d->member}}</td>
-              <td>{{$d->services}}</td>
+              <td>{{!$d->members  ? '-': $d->members->name}}</td>
+              <td>{{!$d->service  ? '-': $d->service->label }}</td>
               <td>{{!$d->tipe_produk ? '-': $tipe_produk[$d->tipe_produk]}}</td>
               <td>{{$status[$d->status]}}</td>
               <td>{{formatDate($d->updated_at)}}</td>

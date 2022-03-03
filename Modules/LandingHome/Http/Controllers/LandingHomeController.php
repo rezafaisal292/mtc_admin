@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Banner\Entities\Banner;
+use Modules\Client\Entities\Client;
 use Modules\Member\Entities\Member;
 use Modules\Pageweb\Entities\Pageweb;
 use Modules\Produk\Entities\Produk;
@@ -26,7 +27,8 @@ class LandingHomeController extends Controller
         $profile = Profile::Landing();
         $produk = Produk::LandingHome();
         $banner = Banner::LandingHome();
-        return view('landinghome::index',compact('services','pageweb','member','profile','produk','banner'));
+        $client= Client::LandingHome();
+        return view('landinghome::index',compact('services','pageweb','member','profile','produk','banner','client'));
     }
 
     /**

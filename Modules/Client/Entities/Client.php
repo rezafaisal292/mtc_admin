@@ -58,7 +58,7 @@ class Client extends Model
     public function scopeLandingHome($query)
     {
 
-        $q = $query->select()->where('status','1')->orderby('urutan','desc')->get();
+        $q = $query->select()->where('status','1')->orderby('label','asc')->get();
           
         return $q;
     }
