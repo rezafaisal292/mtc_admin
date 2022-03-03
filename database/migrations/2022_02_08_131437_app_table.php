@@ -37,10 +37,13 @@ class AppTable extends Migration
             $table->string('image',100)->nullable();
             $table->string('name',50)->nullable();
             $table->text('descp')->nullable();
-            $table->string('phone',30)->nullable();
-            $table->string('email',50)->nullable();
-            $table->string('address',100)->nullable();
-            $table->string('longlat',30)->nullable();
+            $table->timestamps();
+        });
+        Schema::create('app_profile_kontak', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('data',100)->nullable();
+            $table->uuid('id_profile');
+            $table->uuid('id_sosmed');
             $table->timestamps();
         });
 

@@ -1,13 +1,12 @@
 <?php
 
-namespace Modules\ProdukDetail\Entities;
+namespace Modules\Profile\Entities;
 
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Modules\Produk\Entities\Produk;
 
-class ProdukDetail extends Model
+class ProfileKontak extends Model
 {
 	use Uuids;
 
@@ -18,14 +17,11 @@ class ProdukDetail extends Model
      */
     protected $fillable = [
         'id',
-        'url',
-        'image',
-        'label',
-        'descp',
-        'id_produk',
-        
+        'id_profile',
+        'id_sosmed',
+        'data',
     ];
-    protected $table = 'app_produk_detail';
+    protected $table = 'app_profile_kontak';
 
 	protected 	$primaryKey = 'id';
     /**
@@ -38,14 +34,6 @@ class ProdukDetail extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
-        if($request->label)
-            $query->where('label','like','%'.$request->label.'%');
-
-        if($request->id_produk)
-            $query->where('id_produk',$request->id_produk);
-
-
-
 
         $q = $query->select();
                  
@@ -56,26 +44,20 @@ class ProdukDetail extends Model
 
             return $q->paginate(10);
         }
-        return $q->orderby('id_produk','asc')->get();
+        return $q->get();
     }
 
-    public function scopeLandingHome($query)
+    public function scopeLanding($query)
     {
 
-        $q = $query->select()->where('status','1')->orderby('updated_at','desc')->paginate(4);
+        $q = $query->select()->first();
           
         return $q;
     }
 
-    public function scopeFindByLabel($query, string $value)
+    public function scopeFindByName($query, string $value)
     {
         return $query->where('label', $value)->first();
     }
-
-    public function produk()
-    {
-        return $this->hasOne(Produk::class,'id','id_produk');
-    }
-
 
 }
