@@ -119,4 +119,11 @@ class ProfileController extends Controller
 
         return redirect('profile');
     }
+
+    public function updateSosmed(Request $request)
+    {
+        //
+        return redirect('profile');
+    }
+
 }

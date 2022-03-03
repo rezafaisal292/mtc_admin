@@ -48,7 +48,7 @@ $segment = request()->segment(1);
               <td>{{substr($d->descp,0,30)}}</td>
               <td>{{$d->produk->label}}</td>
             
-              <td>{{$d->updated_at}}</td>
+              <td>{{formatDate($d->updated_at)}}</td>
               
             </tr>
             @endforeach 

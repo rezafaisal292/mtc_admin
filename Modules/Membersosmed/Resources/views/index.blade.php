@@ -27,10 +27,12 @@ $segment = request()->segment(1);
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <th>Aksi</th>
-              <th>Member</th>
-              <th>Sosmed</th>
-              <th>Url</th>
+              <th class="col-md-2">Aksi</th>
+              <th class="col-md-2">image</th>
+              <th class="col-md-2">Member</th>
+              <th class="col-md-2">Sosmed</th>
+              <th class="col-md-2">Url</th>
+              <th class="col-md-2">TimeStamp</th>
             </tr>
           </thead>
           <tbody>
@@ -39,9 +41,12 @@ $segment = request()->segment(1);
               <td>
               @include('master-component.button-edit-delete')
               </td>
+
+              <td><img src="{{asset($d->sosmeds->image)}}" width="20%"></td>
               <td>{{$d->members->name}}</td>
               <td>{{$d->sosmeds->name}}</td>
               <td>{{$d->url}}</td>
+              <td>{{formatDate($d->updated_at)}}</td>
             </tr>
             @endforeach 
           </tbody>

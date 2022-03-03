@@ -22,7 +22,6 @@ $segment = request()->segment(1);
     }
     @endphp
 
-
 @section('content_header')
     <h1 class="m-0 text-dark">Profile</h1>
 @stop
@@ -62,4 +61,6 @@ $segment = request()->segment(1);
     </div>
 </div>
 {{ Form::close() }}
+
+</div>
 @stop

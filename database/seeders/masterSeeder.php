@@ -25,7 +25,10 @@ class masterSeeder extends Seeder
 
         DB::table('users')->delete();
         DB::table('roles')->delete();
+        DB::table('role_user')->delete();
         DB::table('permissions')->delete();
+        DB::table('permission_role')->delete();
+        DB::table('permission_user')->delete();
         DB::table('master_page')->delete();
         DB::table('master_option_group')->delete();
         DB::table('master_option_value')->delete();

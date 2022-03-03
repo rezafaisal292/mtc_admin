@@ -35,10 +35,11 @@ $segment = request()->segment(1);
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <th>Aksi</th>
-              <th>Image</th>
-              <th>Nama</th>
-              <th>Descp</th>
+              <th class="col-md-2">Aksi</th>
+              <th class="col-md-3">Image</th>
+              <th class="col-md-2">Nama</th>
+              <th class="col-md-3">Descp</th>
+              <th  class="col-md-2"> TimeStamp</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +51,7 @@ $segment = request()->segment(1);
               <td><img src="{{asset($d->image)}}" width="30%"></td>
               <td>{{$d->name}}</td>
               <td>{{substr($d->descp,0,50)}}</td>
+              <td>{{formatDate($d->updated_at)}}</td>
             </tr>
             @endforeach 
           </tbody>

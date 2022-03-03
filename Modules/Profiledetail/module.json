@@ -1,0 +1,13 @@
+{
+    "name": "Profiledetail",
+    "alias": "profiledetail",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Profiledetail\\Providers\\ProfiledetailServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -17,7 +17,7 @@ $segment = request()->segment(1);
       <div class="card-header">
         <div class="row">
           <div class="col-md-6" style="text-align:left">
-             {{-- Total Data : {{$data->total()}}  --}}
+             Total Data : {{$data->total()}} 
           </div>
           
         </div>
@@ -27,9 +27,10 @@ $segment = request()->segment(1);
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <th class="col-md-4">Aksi</th>
-              <th class="col-md-4">Image</th>
-              <th class="col-md-4">Nama</th>
+              <th class="col-md-3">Aksi</th>
+              <th class="col-md-3">Image</th>
+              <th class="col-md-3">Nama</th>
+              <th class="col-md-3">TimeStamp</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +41,7 @@ $segment = request()->segment(1);
               </td>
               <td><img src="{{asset($d->image)}}" width="5%"></td>
               <td>{{$d->name}}</td>
+              <td>{{formatDate($d->updated_at)}}</td>
             </tr>
             @endforeach 
           </tbody>

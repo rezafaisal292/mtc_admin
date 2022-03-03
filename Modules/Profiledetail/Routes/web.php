@@ -11,9 +11,7 @@
 |
 */
 
-use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::resource('profile', 'ProfileController');
-    Route::post('profile/updateSosmed', 'ProfileController@updateSosmed')->name('profile.updateSosmed');
+    Route::resource('profiledetail', 'ProfiledetailController');
     });
