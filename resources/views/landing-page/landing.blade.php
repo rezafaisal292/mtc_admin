@@ -18,14 +18,42 @@
 <body id="services scrollspy">
 
     <!-- navbar -->
-   
 
-@yield('content')
+
+    @yield('content')
 
     <!-- FOOTER -->
-    <footer class="black">
-        <p class="white-text center">AJ25 PRODUCTION. Copyright 2022</p>
-    </footer>
+    {{-- <footer class="page-footer black center">
+        <div class="footer-copyright">
+            <div class="container">
+                <b class="white-text ">{{ $profile->name }}. Copyright 2022. Powered by Fariq Mujahid S.KOM</b>
+            </div>
+        </div>
+    </footer> --}}
+    <footer class="page-footer black">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">{{$profile->name}} </h5>
+              <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5 class="white-text">Contact Us</h5>
+              <ul>
+                 @foreach($profile->kontak as $k)
+                <li><a class="grey-text text-lighten-3" href="#!"> {{$k->data}}</a></li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2022 Copyright {{$profile->name}}
+          <a class="grey-text text-lighten-4 right" href="#!">Powered By Fariq Mujahid S.kom</a>
+          </div>
+        </div>
+      </footer>
 
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>

@@ -65,4 +65,10 @@ class Profile extends Model
         return $query->where('label', $value)->first();
     }
 
+    public function Kontak()
+    {
+        return $this->hasMany(ProfileKontak::class,'id_profile','id');
+    }
+
+
 }

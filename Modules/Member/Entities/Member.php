@@ -5,6 +5,7 @@ namespace Modules\Member\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Membersosmed\Entities\MemberSosmed;
 
 class Member extends Model
 {
@@ -49,7 +50,7 @@ class Member extends Model
         return $q->orderby('name','asc')->get();
     }
 
-    public function scopeLanding($query)
+    public function scopeLandingHome($query)
     {
 
         $q = $query->select()->orderby('name','asc')->get();
@@ -60,6 +61,11 @@ class Member extends Model
     public function scopeFindByName($query, string $value)
     {
         return $query->where('name', $value)->first();
+    }
+
+    public function membersosmed()
+    {
+        return $this->hasMany(MemberSosmed::class,'member','id');
     }
 
 }

@@ -5,9 +5,9 @@ namespace Modules\Landingmember\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Member\Entities\Member;
 use Modules\Pageweb\Entities\Pageweb;
 use Modules\Profile\Entities\Profile;
-use Modules\Services\Entities\Services;
 
 class LandingmemberController extends Controller
 {
@@ -19,10 +19,10 @@ class LandingmemberController extends Controller
     {
 
 
-        $services = Services::Landing();
         $pageweb = Pageweb::Landing();
         $profile = Profile::Landing();
-        return view('landingmember::index',compact('profile','services','pageweb'));
+        $member = Member::LandingHome();
+        return view('landingmember::index',compact('profile','member','pageweb'));
     }
 
     /**

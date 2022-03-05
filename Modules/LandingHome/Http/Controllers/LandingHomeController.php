@@ -23,11 +23,11 @@ class LandingHomeController extends Controller
     {
         $services = Services::Landing();
         $pageweb = Pageweb::Landing();
-        $member = Member::Landing();
         $profile = Profile::Landing();
         $produk = Produk::LandingHome();
         $banner = Banner::LandingHome();
         $client= Client::LandingHome();
+        $member = Member::LandingHome();
         return view('landinghome::index',compact('services','pageweb','member','profile','produk','banner','client'));
     }
 

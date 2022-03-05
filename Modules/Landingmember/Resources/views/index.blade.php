@@ -1,27 +1,81 @@
 @extends('landing-page.landing')
-@section('title', $profile->name . '::Services')
+@section('title', $profile->name . '::Member')
 
 
-@include('landingservices::navbar')
+@include('landinghome::navbar')
 
 @section('content')
-
-    <section id="services" class="services scrollspy">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m12">
-
-                    <ul id="tabs-swipe-demo" class="tabs">
-                        <li class="tab col s3"><a href="#test-swipe-1">Test 1</a></li>
-                        <li class="tab col s3"><a href="#test-swipe-2">Test 2</a></li>
-                        <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
-                    </ul>
-
-                    <div id="test-swipe-1" class="col s12 blue">Test 1</div>
-                    <div id="test-swipe-2" class="col s12 red">Test 2</div>
-                    <div id="test-swipe-3" class="col s12 green">Test 3</div>
+<section id="member" class="member scrollspy">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12">
+                <h3 class="light black-text ">Member</h3>
+                <div class="progress">
+                    <div class="determinate" style="width: 100%"></div>
                 </div>
+
+                @foreach ($member as $m)
+                    <div class="row">
+                        <div class="col s12 m3">
+                            @if ($m->url != null)
+                                <iframe width="230" height="200" src="{{ $m->url }}" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            @else
+                                @if ($m->image != null)
+                                    <img src="{{ asset($m->image) }}" width="230" height="100">
+                                @endif
+                            @endif
+                        </div>
+
+                        <div class="col s12 m9">
+                            <div class="row">
+                                <div class="col s12 m9">
+                                    <b>{{ $m->name }}</b>
+                                </div>
+                                <div class="col s12 m3">
+                                    <i>{{ formatDate($m->updated_at) }}</i>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s12 m12">
+                                    @php
+                                        $string = strip_tags($m->descp);
+                                        if (strlen($string) > 300) {
+                                            // truncate string
+                                            $stringCut = substr($string, 0, 300);
+                                            $endPoint = strrpos($stringCut, ' ');
+                                        
+                                            //if the string doesn't contain any space then it will cut without word basis.
+                                            $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                            $string .= '... <a href="/this/story">Read More</a>';
+                                        }
+                                    @endphp
+                                    {!! $string !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m6 ">
+                            @if(count($m->membersosmed) >0)
+                            @foreach($m->membersosmed as $ms) 
+                            <a href="{{$ms->url}}"><img src="{{ asset($ms->sosmeds->image)}}" width="5%"> </a>&nbsp;
+                            @endforeach
+                            @endif
+                        </div>
+                        <div class="col s12 m6 right">
+                            <a href="{{ url(request()->segment(1) . '/' . $m->id) }}" class="right">Lihat
+                                Selengkapnya</a>
+                        </div>
+                    </div>
+                    <hr>
+                @endforeach
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @stop

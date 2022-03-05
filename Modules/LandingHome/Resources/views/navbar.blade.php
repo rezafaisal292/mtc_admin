@@ -6,8 +6,9 @@ $segment = request()->segment(1);
     <nav class="black">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="index.html">
-                    {{-- <img src="img/members/1.png" width="108px"></a> --}}
+                <a href="index.html" class="brand-logo">
+                    <img src="{{$profile->image}}" width="70px" class="brand-logo">
+                </a>
                     <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         @foreach ($pageweb as $pw)
