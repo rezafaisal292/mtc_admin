@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Member\Entities;
+namespace Modules\ProdukDetail\Entities;
 
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Modules\Membersosmed\Entities\MemberSosmed;
+use Modules\Produk\Entities\Produk;
 
-class Member extends Model
+class ProdukDetail extends Model
 {
 	use Uuids;
 
@@ -18,11 +18,14 @@ class Member extends Model
      */
     protected $fillable = [
         'id',
+        'url',
         'image',
-        'name',
+        'label',
         'descp',
+        'id_produk',
+        
     ];
-    protected $table = 'app_member';
+    protected $table = 'app_produk_detail';
 
 	protected 	$primaryKey = 'id';
     /**
@@ -35,8 +38,14 @@ class Member extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
-        if($request->name)
-        $query->where('name','ilike','%'.$request->name.'%');
+        if($request->label)
+            $query->where('label','like','%'.$request->label.'%');
+
+        if($request->id_produk)
+            $query->where('id_produk',$request->id_produk);
+
+
+
 
         $q = $query->select();
                  
@@ -47,38 +56,26 @@ class Member extends Model
 
             return $q->paginate(10);
         }
-        return $q->orderby('name','asc')->get();
+        return $q->orderby('id_produk','asc')->get();
     }
 
     public function scopeLandingHome($query)
     {
 
-        $q = $query->select()->orderby('name','asc')->get();
+        $q = $query->select()->where('status','1')->orderby('updated_at','desc')->paginate(4);
           
         return $q;
     }
 
-    public function scopeAll($query)
+    public function scopeFindByLabel($query, string $value)
     {
-
-        $q = $query->select()->orderby('name','asc')->get();
-          
-        return $q;
-    }
-    public function scopeLanding($query)
-    {
-        $q = $query->select()->orderby('name','asc')->paginate(10);
-          
-        return $q;
-    }
-    public function scopeFindByName($query, string $value)
-    {
-        return $query->where('name', $value)->first();
+        return $query->where('label', $value)->first();
     }
 
-    public function membersosmed()
+    public function produk()
     {
-        return $this->hasMany(MemberSosmed::class,'member','id');
+        return $this->hasOne(Produk::class,'id','id_produk');
     }
+
 
 }

@@ -21,7 +21,7 @@ class LandingmemberController extends Controller
 
         $pageweb = Pageweb::Landing();
         $profile = Profile::Landing();
-        $member = Member::LandingHome();
+        $member = Member::Landing();
         return view('landingmember::index',compact('profile','member','pageweb'));
     }
 

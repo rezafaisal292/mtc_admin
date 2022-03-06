@@ -74,14 +74,14 @@ class Produk extends Model
     public function scopeLandingHome($query)
     {
 
-        $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('updated_at','desc')->paginate(4);
+        $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('created_at','desc')->paginate(4);
           
         return $q;
     }
 
     public function scopeLandingProduk($query)
     {
-        $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('updated_at','desc')->paginate(10);  
+        $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('created_at','desc')->paginate(10);  
         return $q;
     }
 

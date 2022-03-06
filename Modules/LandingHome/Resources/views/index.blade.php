@@ -121,7 +121,7 @@
                             @endif
 
                             <b>{{ $pr->label }}</b>
-
+<br>
                             @php
                                 $string = strip_tags($pr->descp);
                                 if (strlen($string) > 100) {

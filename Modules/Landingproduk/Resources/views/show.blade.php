@@ -6,6 +6,7 @@
 
 @section('content')
     <section id="produk" class="produk scrollspy">
+
         <div class="container">
             <div class="row">
                 <div class="col s12 m12">
@@ -13,25 +14,37 @@
                     <div class="progress">
                         <div class="determinate" style="width: 100%"></div>
                     </div>
+                </div>
+                <div class="row ">
+                    <div class="col s12 m12 center">
+                        @if ($d->url != null)
+                            <iframe src="{{ $d->url }}" {{-- width="1424" height="620" --}} {{-- width="950" height="534" --}}
+                                 width="100%"
+                                height="450" 
 
-
-                    <div class="row">
-                        <div class="col s12 m3">
-                            @if ($d->url != null)
-                                <iframe width="230" height="200" src="{{ $d->url }}" title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                            @else
-                                @if ($sp->image != null)
-                                    <img src="{{ asset($d->image) }}" width="230">
-                                @endif
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        @else
+                            @if ($sp->image != null)
+                                <img src="{{ asset($d->image) }}" width="230">
                             @endif
-                        </div>
+                        @endif
+
+                    </div>
+                </div>
+               
+                <div class="row ">
+                    <div class="col s12 m12 ">
 
                         {!! $d->descp !!}
-                        <br>
+                    </div>
+                </div>
 
+<hr>
+                <div class="row right">
+                    <div class="col s12 m12 right">
+                       <a href="{{ url()->previous() }}"><< Kembali</a>
                     </div>
                 </div>
             </div>

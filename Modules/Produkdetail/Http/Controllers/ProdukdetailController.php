@@ -1,17 +1,15 @@
 <?php
 
-namespace Modules\Produk\Http\Controllers;
+namespace Modules\Produkdetail\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Member\Entities\Member;
 use Modules\Produk\Entities\Produk;
-use Modules\Services\Entities\Services;
-use Illuminate\Support\Facades\File;
 use Modules\ProdukDetail\Entities\ProdukDetail;
+use Illuminate\Support\Facades\File;
 
-class ProdukController extends Controller
+class ProdukdetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +17,10 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Produk::fetch($request);
+        $data = ProdukDetail::fetch($request);
 
-        $member = to_dropdown(Member::All(), 'id', 'name');
-        $services = to_dropdown(Services::Landing(), 'id', 'label');
-        return view('produk::index', compact('data','member','services'));
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'label');
+        return view('produkdetail::index',compact('data','produk'));
     }
 
     /**
@@ -32,11 +29,10 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $d = new Produk;
+        $d=new ProdukDetail;
 
-        $member = to_dropdown(Member::All(), 'id', 'name');
-        $services = to_dropdown(Services::Landing(), 'id', 'label');
-        return view('produk::form', compact('d', 'member', 'services'));
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'label');
+        return view('produkdetail::form',compact('d','produk'));
     }
 
     /**
@@ -46,7 +42,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        Produk::create($request->only('url', 'label', 'descp', 'member', 'services', 'tipe_produk', 'status'));
+        ProdukDetail::create($request->only('url', 'label', 'descp', 'id_produk', 'status'));
         if ($request->file('images')) {
             // menyimpan data file yang diupload ke variabel $file
             $image = $request->file('images');
@@ -65,18 +61,18 @@ class ProdukController extends Controller
             // tipe mime
             $image->getMimeType();
             // isi dengan nama folder tempat kemana file diupload
-            $tujuan_upload = 'images/produk';
+            $tujuan_upload = 'images/produkdetail';
 
-            $id = Produk::FindByLabel($request->label)->id;
+            $id = ProdukDetail::FindByLabel($request->label)->id;
 
             $nameFile = $id . '.' . $image->getClientOriginalExtension();
             $image->move($tujuan_upload, $nameFile);
 
             $imageDir =  $tujuan_upload . '/' . $nameFile;
-            Produk::find($id)->update(['image' => $imageDir]);
+            ProdukDetail::find($id)->update(['image' => $imageDir]);
         }
 
-        return redirect('produk')->with(['success' => '`' . $request->label . '` Berhasil disimpan']);
+        return redirect('produkdetail')->with(['success' => '`' . $request->label . '` Berhasil disimpan']);
     }
 
     /**
@@ -86,7 +82,7 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        return view('produk::show');
+        return view('produkdetail::show');
     }
 
     /**
@@ -94,13 +90,13 @@ class ProdukController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit(Produk $produk)
+    public function edit(ProdukDetail $produkdetail)
     {
-        $d = $produk;
-        $member = to_dropdown(Member::All(), 'id', 'name');
-        $services = to_dropdown(Services::Landing(), 'id', 'label');
+        $d=$produkdetail;
 
-        return view('produk::form', compact('d', 'member', 'services'));
+        $produk = to_dropdown(Produk::LandingHome(), 'id', 'label');
+
+        return view('produkdetail::form',compact('d','produk'));
     }
 
     /**
@@ -109,7 +105,7 @@ class ProdukController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request,ProdukDetail $produkdetail)
     {
         if ($request->file('images')) {
             // $validator = Validator::make($request->all(), [
@@ -119,7 +115,7 @@ class ProdukController extends Controller
                 'images' => 'max:1024',
             ]);
 
-            $image_old = $produk->image;  // Value is not URL but directory file path
+            $image_old = $produkdetail->image;  // Value is not URL but directory file path
             if ($image_old != null) {
                 if (File::exists($image_old)) {
                     File::delete($image_old);
@@ -142,19 +138,19 @@ class ProdukController extends Controller
             // tipe mime
             // $image->getMimeType();    
             // isi dengan nama folder tempat kemana file diupload
-            $tujuan_upload = 'images/produk';
+            $tujuan_upload = 'images/produkdetail';
 
 
-            $nameFile = $produk->id . '.' . $image->getClientOriginalExtension();
+            $nameFile = $produkdetail->id . '.' . $image->getClientOriginalExtension();
             $image->move($tujuan_upload, $nameFile);
 
             $request['image'] =  $tujuan_upload . '/' . $nameFile;
 
-            $produk->update($request->only('image', 'url', 'label', 'descp', 'member', 'services', 'tipe_produk', 'status'));
+            $produkdetail->update($request->only('image','url', 'label', 'descp', 'id_produk', 'status'));
         } else {
-            $produk->update($request->only('url', 'label', 'descp', 'member', 'services', 'tipe_produk', 'status'));
+            $produkdetail->update($request->only('url', 'label', 'descp', 'id_produk', 'status'));
         }
-        return redirect('produk')->with(['success' => '`' . $request->label . '` Berhasil diubah']);
+        return redirect('produkdetail')->with(['success' => '`' . $request->label . '` Berhasil diubah']);
     }
 
     /**
@@ -162,18 +158,16 @@ class ProdukController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy(Produk $produk)
+    public function destroy(ProdukDetail $produkdetail)
     {
-        $name = $produk->label;
-        $image_old = $produk->image;  // Value is not URL but directory file path
+        $name = $produkdetail->label;
+        $image_old = $produkdetail->image;  // Value is not URL but directory file path
         if (File::exists($image_old)) {
             File::delete($image_old);
         }
-        ProdukDetail::where('id_produk',$produk->id)->delete();
         
-        $produk->delete();
+        $produkdetail->delete();
 
         return redirect('produk')->with(['success' => '`' . $name . '` Berhasil dihapus']);
-
     }
 }

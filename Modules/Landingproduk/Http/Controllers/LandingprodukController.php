@@ -55,7 +55,7 @@ class LandingprodukController extends Controller
         $pageweb = Pageweb::Landing();
         $profile = Profile::Landing();
         $produk = Produk::LandingProduk();
-        return view('landingproduk::test',compact('profile','pageweb','d','produk'));
+        return view('landingproduk::show',compact('profile','pageweb','d','produk'));
     }
 
     /**
