@@ -51,6 +51,7 @@ class AppTable extends Migration
             $table->uuid('id')->primary();
             $table->string('url',100)->nullable();
             $table->string('image',100)->nullable();
+            $table->string('imagebanner',100)->nullable();
             $table->string('name',50)->nullable();
             $table->text('descp')->nullable();
             $table->timestamps();

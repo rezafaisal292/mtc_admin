@@ -37,6 +37,7 @@ $segment = request()->segment(1);
             <tr>
               <th class="col-md-2">Aksi</th>
               <th class="col-md-3">Image</th>
+              <th class="col-md-3">Image Banner</th>
               <th class="col-md-2">Nama</th>
               <th class="col-md-3">Descp</th>
               <th  class="col-md-2"> TimeStamp</th>
@@ -49,6 +50,7 @@ $segment = request()->segment(1);
               @include('master-component.button-edit-delete')
               </td>
               <td><img src="{{asset($d->image)}}" width="30%"></td>
+              <td>@if(!$d->imagebanner) - @else<img src="{{asset($d->imagebanner)}}" width="30%"> @endif</td>
               <td>{{$d->name}}</td>
               <td>{{substr($d->descp,0,50)}}</td>
               <td>{{formatDate($d->updated_at)}}</td>

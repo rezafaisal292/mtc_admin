@@ -19,6 +19,7 @@ class Member extends Model
     protected $fillable = [
         'id',
         'image',
+        'imagebanner',
         'name',
         'descp',
     ];

@@ -18,9 +18,6 @@ class LandingprofileController extends Controller
     public function index(Request $request)
     {
 
-
-
-
         $services = Services::Landing();
         $pageweb = Pageweb::Landing();
         $profile = Profile::Landing();
