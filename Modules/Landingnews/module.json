@@ -1,0 +1,13 @@
+{
+    "name": "Landingnews",
+    "alias": "landingnews",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Landingnews\\Providers\\LandingnewsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

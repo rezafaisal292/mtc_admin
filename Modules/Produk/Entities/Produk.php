@@ -84,6 +84,11 @@ class Produk extends Model
         $q = $query->select()->where('status','1')->where('tipe_produk','1')->orderby('created_at','desc')->paginate(10);  
         return $q;
     }
+    public function scopeLandingNews($query)
+    {
+        $q = $query->select()->where('status','1')->where('tipe_produk','2')->orderby('created_at','desc')->paginate(10);  
+        return $q;
+    }
 
 
     public function scopeFindByLabel($query, string $value)

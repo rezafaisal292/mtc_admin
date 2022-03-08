@@ -60,7 +60,7 @@
                         </div>
                         <div class="row">
                             <div class="col s12 m6 ">
-                                <i><b>{{ !$p->service ? '' : $p->service->label . ',' }}</b></i>
+                                <b>{{ !$p->service ? '' : $p->service->label  }}</b>
                                 &nbsp;
                                 <i>{{ !$p->members ? '' : $p->members->name }}</i>
                             </div>
