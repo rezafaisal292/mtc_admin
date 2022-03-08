@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Member\Entities\Member;
 use Illuminate\Support\Facades\File;
+use Modules\Memberdetail\Entities\MemberDetail;
+use Modules\Membersosmed\Entities\MemberSosmed;
+use Modules\Produk\Entities\Produk;
 
 class MemberController extends Controller
 {
@@ -42,7 +45,7 @@ class MemberController extends Controller
             'imagesbanner' => 'max:1024',
         ]);
 
-        Member::create($request->only('name', 'descp'));
+        Member::create($request->only('name', 'descp','status'));
         if ($request->file('images')) {
             // menyimpan data file yang diupload ke variabel $file
             $image = $request->file('images');
@@ -139,7 +142,6 @@ class MemberController extends Controller
         ]);
         if ($request->file('images')) {
            
-
             $image_old = $member->image;  // Value is not URL but directory file path
             if (File::exists($image_old)) {
                 File::delete($image_old);
@@ -170,9 +172,9 @@ class MemberController extends Controller
 
             $request['image'] =  $tujuan_upload . '/' . $nameFile;
 
-            $member->update($request->only('image', 'name', 'descp'));
+            $member->update($request->only('image'));
         }
-        else if ($request->file('imagesbanner')) {
+         if ($request->file('imagesbanner')) {
           
             $image_old = $member->imagebanner;  // Value is not URL but directory file path
             if (File::exists($image_old)) {
@@ -203,12 +205,15 @@ class MemberController extends Controller
 
             $request['imagebanner'] =  $tujuan_upload . '/' . $nameFile;
 
-            $member->update($request->only('imagebanner', 'name', 'descp'));
+            $member->update($request->only('imagebanner'));
         }
-        else
-        {
-            $member->update($request->only( 'name', 'descp'));
-        }
+       
+            $member->update($request->only( 'name', 'descp','status'));
+            if($request->status == '2')
+            {
+                Produk::where('member',$member->id)->update(['member'=>null]);
+            }
+        
         return redirect('member')->with(['success' => '`' . $request->name . '` Berhasil diubah']);
     }
 
@@ -224,8 +229,12 @@ class MemberController extends Controller
         if (File::exists($image_old)) {
             File::delete($image_old);
         }
-        
+
+        Produk::where('member',$member->id)->update(['member'=>null]);
+        MemberDetail::where('id_member',$member->id)->delete();
+        MemberSosmed::where('member',$member->id)->delete();
         $member->delete();
+
 
         return redirect('member')->with(['success' => '`' . $name . '` Berhasil dihapus']);
     }

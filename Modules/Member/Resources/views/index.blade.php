@@ -35,12 +35,13 @@ $segment = request()->segment(1);
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <th class="col-md-2">Aksi</th>
+              <th class="col-md-1">Aksi</th>
               <th class="col-md-3">Image</th>
               <th class="col-md-3">Image Banner</th>
               <th class="col-md-2">Nama</th>
-              <th class="col-md-3">Descp</th>
-              <th  class="col-md-2"> TimeStamp</th>
+              <th class="col-md-2">Descp</th>
+              <th class="col-md-1">Status</th>
+              <th  class="col-md-1"> TimeStamp</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +54,7 @@ $segment = request()->segment(1);
               <td>@if(!$d->imagebanner) - @else<img src="{{asset($d->imagebanner)}}" width="30%"> @endif</td>
               <td>{{$d->name}}</td>
               <td>{{substr($d->descp,0,50)}}</td>
+              <td>{{$status[$d->status]}}</td>
               <td>{{formatDate($d->updated_at)}}</td>
             </tr>
             @endforeach 

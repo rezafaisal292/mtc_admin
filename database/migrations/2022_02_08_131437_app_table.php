@@ -54,13 +54,14 @@ class AppTable extends Migration
             $table->string('imagebanner',100)->nullable();
             $table->string('name',50)->nullable();
             $table->text('descp')->nullable();
+            $table->char('status',1);
             $table->timestamps();
         });
 
         Schema::create('app_member_detail', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('url',100);
-            $table->string('image',100);
+            $table->string('url',100)->nullable();
+            $table->string('image',100)->nullable();
             $table->text('descp')->nullable();
             $table->uuid('id_member');
             $table->char('status',1);

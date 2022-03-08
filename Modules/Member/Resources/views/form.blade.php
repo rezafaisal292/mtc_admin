@@ -24,7 +24,8 @@ if ($segment !== 'create') {
     <div class="card-body">
         <div class="form-group row">
             <div class="col-md-6">
-                {{ Form::fgText('Nama', 'name', $d->name, ['class' => 'form-control'], null, 'text', true) }}
+                {{ Form::fgText('Nama', 'name', $d->name, ['class' => 'form-control'], null, 'text', true) }} 
+                {{ Form::fgSelect('Status', 'status', $status,$d->status, ['class' => 'form-control'], null, 'text', true) }}
                 <div class="form-group">
                     <b>Logo</b><br />
                     {{$d->images}}

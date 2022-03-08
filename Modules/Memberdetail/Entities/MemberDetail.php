@@ -5,6 +5,7 @@ namespace Modules\Memberdetail\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Member\Entities\Member;
 use Modules\Membersosmed\Entities\MemberSosmed;
 
 class MemberDetail extends Model
@@ -37,8 +38,11 @@ class MemberDetail extends Model
 
     public function scopefetch($query, $request, $export = false)
     {
-        if($request->name)
-        $query->where('name','ilike','%'.$request->name.'%');
+        if($request->status)
+        $query->where('status',$request->status);
+
+        if($request->id_member)
+        $query->where('id_member',$request->id_member);
 
         $q = $query->select();
                  
@@ -52,5 +56,9 @@ class MemberDetail extends Model
         return $q->orderby('name','asc')->get();
     }
 
+    public function member()
+    {
+        return $this->hasOne(Member::class,'id','id_member');
+    }
 
 }

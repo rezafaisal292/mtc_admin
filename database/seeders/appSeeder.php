@@ -258,24 +258,28 @@ class appSeeder extends Seeder
                 'imagebanner' => null,
                 'name' => 'J25',
                 'descp' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                'status'=>'1'
             ],
             [
                 'image' =>  'images/master/mtc.png',
                 'imagebanner' => null,
                 'name' => 'MTC',
                 'descp' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                'status'=>'1'
             ],
             [
                 'image' => 'images/master/hyper.png',
                 'imagebanner' => 'images/master/hyperbanner.jpg',
                 'name' => 'Hyper',
                 'descp' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                'status'=>'1'
             ],
             [
                 'image' =>  'images/master/marinosh.png',
                 'imagebanner' => 'images/master/marinoshbanner.jpg',
                 'name' => 'Marinosh',
                 'descp' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                'status'=>'1'
             ]
         ];
         foreach ($member as $m) {
@@ -320,10 +324,10 @@ class appSeeder extends Seeder
             [
                 'url' => 'https://www.youtube.com/embed/aAc0OAgBLn0',
                 'image' => null,
-                'label' => 'Lorem Ipsum is simply',
+                'label' => 'MV Hyper',
                 'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-                'member' => null,
-                'services' =>   null,
+                'member' => Member::where('name','Hyper')->first()->id,
+                'services' => Services::where('label','DIGITAL CONTENT')->first()->id,
                 'tipe_produk' => '1',
                 'status' => '1'
             ],
@@ -352,9 +356,9 @@ class appSeeder extends Seeder
                 'image' => null,
                 'label' => 'Lorem Ipsum is simply',
                 'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-                'member' => null,
-                'services' =>   null,
-                'tipe_produk' => '1',
+                'member' => Member::where('name','J25')->first()->id,
+                'services' => Services::where('label','DIGITAL CONTENT')->first()->id,
+                'tipe_produk' => '2',
                 'status' => '1'
             ],
         ];

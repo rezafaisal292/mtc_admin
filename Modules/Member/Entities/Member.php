@@ -22,6 +22,7 @@ class Member extends Model
         'imagebanner',
         'name',
         'descp',
+        'status',
     ];
     protected $table = 'app_member';
 

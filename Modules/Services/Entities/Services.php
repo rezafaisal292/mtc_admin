@@ -65,7 +65,7 @@ class Services extends Model
 
      public function produks()
     {
-        return $this->hasMany(Produk::class,'services','id')->orderBy('label');
+        return $this->hasMany(Produk::class,'services','id')->where('status','1')->where('tipe_produk','1')->orderBy('label');
     }
 
 }

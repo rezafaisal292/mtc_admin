@@ -5,6 +5,7 @@ namespace Modules\Services\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Produk\Entities\Produk;
 use Modules\Services\Entities\Services;
 
 class ServicesController extends Controller
@@ -73,7 +74,12 @@ class ServicesController extends Controller
     public function update(Request $request, Services $service)
     {
         //
+        if($request->status == '2')
+            {
+                Produk::where('services',$service->id)->update(['services'=>null]);
+            }
         $service->update($request->all());
+        
         return redirect('services')->with(['success' => '`' . $service->label . '` Berhasil diubah']);
     }
 
@@ -84,6 +90,7 @@ class ServicesController extends Controller
      */
     public function destroy(Services $service)
     {
+        Produk::where('services',$service->id)->update(['services'=>null]);
         $service->delete();
 
 

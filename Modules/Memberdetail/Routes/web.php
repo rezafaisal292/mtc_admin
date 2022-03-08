@@ -11,7 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('memberdetail', 'MemberdetailController');
+    Route::post('memberdetail/filter', 'MemberdetailController@index');
     });

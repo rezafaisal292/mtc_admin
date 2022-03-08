@@ -93,11 +93,11 @@ class Produk extends Model
 
     public function members()
     {
-        return $this->hasOne(Member::class,'id','member');
+        return $this->hasOne(Member::class,'id','member')->where('status','1');
     }
     public function service()
     {
-        return $this->hasOne(Services::class,'id','services');
+        return $this->hasOne(Services::class,'id','services')->where('status','1');
     }
 
 

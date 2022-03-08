@@ -10,7 +10,7 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['memb
 @section('content_header')
 <h1 class="m-0 text-dark">Memberdetail</h1>
 @stop
-{{ Form::open(['route' => $action, 'method' => $method, 'class' => 'form-horizontal form-data', 'autocomplete' => 'off']) }}
+{{ Form::open(['route' => $action, 'method' => $method, 'class' => 'form-horizontal form-data', 'autocomplete' => 'off','enctype' => 'multipart/form-data']) }}
 <div class="card card-primary">
     <div class="card-header">
         {{$title}} Data Memberdetail

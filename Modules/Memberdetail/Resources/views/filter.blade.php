@@ -11,7 +11,17 @@
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ Form::fgSelect('Member', 'id_member',$member, request()->id_member, ['class' => 'form-control']) }}
+                        
+                    </div> 
+                    <div class="col-md-3">
+                        {{ Form::fgSelect('Status', 'status',to_dropdown($status,'key','value'), request()->status, ['class' => 'form-control']) }}
+                        
+                    </div>
+                </div>
             </div>
             <div class="card-footer clearfix float-right">
                 <button type="submit" class="btn btn-info btn-sm">
