@@ -26,14 +26,23 @@ if ($segment !== 'create') {
             <div class="col-md-6">
                 {{ Form::fgText('Nama', 'name', $d->name, ['class' => 'form-control'], null, 'text', true) }}
                 <div class="form-group">
-                    <b>File Gambar</b><br />
-
+                    <b>Logo</b><br />
+                    {{$d->images}}
                     <input type="file" name="images">
                     @if ($d->image != null)
                         <img src="{{ asset($d->image) }}" width="30%">
                     @endif
                 </div>
+                <div class="form-group">
+                    <b>Banner</b><br />
+
+                    <input type="file" name="imagesbanner">
+                    @if ($d->image != null)
+                        <img src="{{ asset($d->imagebanner) }}" width="30%">
+                    @endif
+                </div>
             </div>
+           
 
             <div class="col-md-12">
                 <b>Deskripsi</b>

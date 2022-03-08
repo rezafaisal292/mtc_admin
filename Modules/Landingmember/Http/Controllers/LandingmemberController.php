@@ -17,8 +17,6 @@ class LandingmemberController extends Controller
      */
     public function index(Request $request)
     {
-
-
         $pageweb = Pageweb::Landing();
         $profile = Profile::Landing();
         $member = Member::Landing();
@@ -50,9 +48,13 @@ class LandingmemberController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(Member $landingmember)
     {
-        return view('landingmember::show');
+        $d = $landingmember;
+
+        $pageweb = Pageweb::Landing();
+        $profile = Profile::Landing();
+        return view('landingmember::show',compact('d','pageweb','profile'));
     }
 
     /**

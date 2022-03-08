@@ -5,6 +5,8 @@ namespace Modules\Memberdetail\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Member\Entities\Member;
+use Modules\Memberdetail\Entities\MemberDetail;
 
 class MemberdetailController extends Controller
 {
@@ -14,7 +16,9 @@ class MemberdetailController extends Controller
      */
     public function index(Request $request)
     {
-        return view('memberdetail::index');
+        $data=MemberDetail::fetch($request);
+        $member=to_dropdown(Member::All(),'id','name');
+        return view('memberdetail::index',compact('data','member'));
     }
 
     /**
@@ -23,7 +27,9 @@ class MemberdetailController extends Controller
      */
     public function create()
     {
-        return view('memberdetail::form');
+        $d= new MemberDetail;
+        $member=to_dropdown(Member::All(),'id','name');
+        return view('memberdetail::form',compact('d','member'));
     }
 
     /**
@@ -33,7 +39,7 @@ class MemberdetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
         return redirect('memberdetail');
     }
 
@@ -52,9 +58,10 @@ class MemberdetailController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(MemberDetail $memberdetail)
     {
-        return view('memberdetail::edit');
+        $d=$memberdetail;
+        return view('memberdetail::form',compact('d'));
     }
 
     /**

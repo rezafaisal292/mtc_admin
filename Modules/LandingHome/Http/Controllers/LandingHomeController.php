@@ -27,7 +27,7 @@ class LandingHomeController extends Controller
         $produk = Produk::LandingHome();
         $banner = Banner::LandingHome();
         $client= Client::LandingHome();
-        $member = Member::LandingHome();
+        $member = Member::All();
         return view('landinghome::index',compact('services','pageweb','member','profile','produk','banner','client'));
     }
 

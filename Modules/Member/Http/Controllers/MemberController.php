@@ -37,6 +37,10 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'images' => 'max:1024',
+            'imagesbanner' => 'max:1024',
+        ]);
 
         Member::create($request->only('name', 'descp'));
         if ($request->file('images')) {
@@ -66,6 +70,34 @@ class MemberController extends Controller
 
             $imageDir =  $tujuan_upload . '/' . $nameFile;
             Member::find($id)->update(['image' => $imageDir]);
+        }
+        if ($request->file('imagesbanner')) {
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('imagesbanner');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/member';
+
+            $id = Member::FindByName($request->name)->id;
+
+            $nameFile = $id . '_banner.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $imageDir =  $tujuan_upload . '/' . $nameFile;
+            Member::find($id)->update(['imagebanner' => $imageDir]);
         }
 
         return redirect('member')->with(['success' => '`' . $request->name . '` Berhasil disimpan']);
@@ -101,7 +133,13 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
+        $request->validate([
+            'images' => 'max:1024',
+            'imagesbanner' => 'max:1024',
+        ]);
         if ($request->file('images')) {
+           
+
             $image_old = $member->image;  // Value is not URL but directory file path
             if (File::exists($image_old)) {
                 File::delete($image_old);
@@ -133,6 +171,39 @@ class MemberController extends Controller
             $request['image'] =  $tujuan_upload . '/' . $nameFile;
 
             $member->update($request->only('image', 'name', 'descp'));
+        }
+        else if ($request->file('imagesbanner')) {
+          
+            $image_old = $member->imagebanner;  // Value is not URL but directory file path
+            if (File::exists($image_old)) {
+                File::delete($image_old);
+            }
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('imagesbanner');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            // $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images/member';
+
+
+            $nameFile = $member->id . '_banner.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $request['imagebanner'] =  $tujuan_upload . '/' . $nameFile;
+
+            $member->update($request->only('imagebanner', 'name', 'descp'));
         }
         else
         {

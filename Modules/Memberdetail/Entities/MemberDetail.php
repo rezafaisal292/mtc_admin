@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Member\Entities;
+namespace Modules\Memberdetail\Entities;
 
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Modules\Membersosmed\Entities\MemberSosmed;
 
-class Member extends Model
+class MemberDetail extends Model
 {
 	use Uuids;
 
@@ -18,12 +18,13 @@ class Member extends Model
      */
     protected $fillable = [
         'id',
+        'url',
         'image',
-        'imagebanner',
-        'name',
         'descp',
+        'id_member',
+        'status',
     ];
-    protected $table = 'app_member';
+    protected $table = 'app_member_detail';
 
 	protected 	$primaryKey = 'id';
     /**
@@ -51,28 +52,5 @@ class Member extends Model
         return $q->orderby('name','asc')->get();
     }
 
-
-    public function scopeAll($query)
-    {
-
-        $q = $query->select()->orderby('name','asc')->get();
-          
-        return $q;
-    }
-    public function scopeLanding($query)
-    {
-        $q = $query->select()->orderby('name','asc')->paginate(10);
-          
-        return $q;
-    }
-    public function scopeFindByName($query, string $value)
-    {
-        return $query->where('name', $value)->first();
-    }
-
-    public function membersosmed()
-    {
-        return $this->hasMany(MemberSosmed::class,'member','id');
-    }
 
 }
