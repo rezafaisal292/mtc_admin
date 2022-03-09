@@ -46,7 +46,7 @@ $segment = request()->segment(1);
                                         )
                                     </td>
 
-                                    <td>{{ $d->member->name }}</td>
+                                    <td>@if($d->member!=null) {{ $d->member->name }} @else - @endif</td>
                                     <td>{{ $d->url }}</td>
                                     <td>
                                         @if ($d->image != null)

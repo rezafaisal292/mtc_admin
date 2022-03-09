@@ -138,8 +138,7 @@ class appSeeder extends Seeder
                 'status' => '1',
             ],
             [
-                'icon' => '
-                <i class="material-icons medium">event</i>',
+                'icon' => '<i class="material-icons medium">event</i>',
                 'label' => 'EVENT & WEDDING PLANNER',
                 'descp' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 'status' => '1',
@@ -334,17 +333,17 @@ class appSeeder extends Seeder
             [
                 'url' => 'https://www.youtube.com/embed/kWBKPhyPV2w',
                 'image' => null,
-                'label' => 'Lorem Ipsum is simply',
+                'label' => 'Sakit Gigi',
                 'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
                 'member' => null,
-                'services' =>   null,
+                'services' =>   Services::where('label','MANAGEMENT ARTIST')->first()->id,
                 'tipe_produk' => '1',
                 'status' => '1'
             ],
             [
                 'url' => 'https://www.youtube.com/embed/b6sjIXvaeJA',
                 'image' => null,
-                'label' => 'Lorem Ipsum is simply',
+                'label' => 'Marinosh',
                 'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
                 'member' => null,
                 'services' =>   null,
@@ -354,7 +353,7 @@ class appSeeder extends Seeder
             [
                 'url' => 'https://www.youtube.com/embed/xHNy4Vrq73E',
                 'image' => null,
-                'label' => 'Lorem Ipsum is simply',
+                'label' => 'Felix Irawan',
                 'descp' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
                 'member' => Member::where('name','J25')->first()->id,
                 'services' => Services::where('label','DIGITAL CONTENT')->first()->id,

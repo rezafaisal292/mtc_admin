@@ -49,9 +49,12 @@ class LandingservicesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(Services $landingservice)
     {
-        return view('landingservices::show');
+        $d=$landingservice;
+        $pageweb = Pageweb::Landing();
+        $profile = Profile::Landing();
+        return view('landingservices::show',compact('profile','pageweb','d'));
     }
 
     /**

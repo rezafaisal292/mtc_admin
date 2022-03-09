@@ -32,11 +32,16 @@
             </div>
         {{-- </div>
     </section> --}}
-    <section id="member" class="member scrollspy">
+    {{-- <section id="member" class="member scrollspy"> --}}
+
+       
         <div class="container">
             <div class="row">
+                <div class="col s12 m12 right">
+                    <a href="{{ url()->previous() }}" class="right"><< Kembali</a>
+                 </div>
                 <div class="col s12 m12 ">
-                    <h3>{{ $d->name }}</h3>
+                    <h4>{{ $d->name }}</h4>
                     <div class="progress">
                         <div class="determinate" style="width: 100%"></div>
                     </div>
@@ -48,5 +53,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    {{-- </section> --}}
 @stop

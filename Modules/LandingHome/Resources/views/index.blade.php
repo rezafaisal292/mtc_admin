@@ -84,7 +84,8 @@
                                 
                                     //if the string doesn't contain any space then it will cut without word basis.
                                     $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                    $string .= '... <a href="/this/story">Read More</a>';
+                                    $string .= '... <a href="'.url('landingservices/'.$s->id).'" class="right">Lihat Selengkapnya</a>
+';
                                 }
                                 
                             @endphp
