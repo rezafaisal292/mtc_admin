@@ -31,28 +31,49 @@ $segment = request()->segment(1);
         Data Profile
     </div>
     <div class="card-body">
-        <div class="form-group row">
+        <div class="form-group">
             <div class="col-md-6">
                 {{ Form::fgText('Nama', 'name', $d->name, ['class' => 'form-control'], null, 'text', true) }}
-                {{ Form::fgText('Telp', 'phone', $d->phone, ['class' => 'form-control'], null, 'text', true) }}
-                {{ Form::fgText('Email', 'email', $d->email, ['class' => 'form-control'], null, 'text', true) }}
-                {{ Form::fgText('Alamat', 'address', $d->address, ['class' => 'form-control'], null, 'text', true) }}
-
-                <div class="form-group">
-                    <b>File Gambar</b><br />
-
-                    <input type="file" name="images">
-                    @if ($d->image != null)
-                        <img src="{{ asset($d->image) }}" width="30%">
-                    @endif
-                </div>
             </div>
             <div class="col-md-12">
-                <b>Deskripsi</b>
-                <textarea id="summernote" style="display: none;" name="descp">
+                @foreach ($d->Kontak as $pk)
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ Form::fgSelect('Tipe Kontak','id_sosmed[]',$sosmed,$pk->id_sosmed,['class' => 'form-control'],null,'text',true) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ Form::fgText('Data', 'data[]', $pk->data, ['class' => 'form-control'], null, 'text', true) }}
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="row">
+                    <div class="col-md-3">
+                        <button  type="button" class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <b>File Gambar</b><br />
+
+                <input type="file" name="images">
+                @if ($d->image != null)
+                    <img src="{{ asset($d->image) }}" width="30%">
+                @endif
+            </div>
+        </div>
+        <div class="col-md-12">
+            <b>Deskripsi</b>
+            <textarea id="summernote" style="display: none;" name="descp">
             {{ $d->descp }}
              </textarea>
-            </div>
         </div>
     </div>
 
@@ -62,5 +83,4 @@ $segment = request()->segment(1);
 </div>
 {{ Form::close() }}
 
-</div>
 @stop

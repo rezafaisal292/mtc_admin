@@ -50,7 +50,7 @@ class Sosmed extends Model
         return $q->get();
     }
 
-    public function scopeLanding($query)
+    public function scopeAll($query)
     {
 
         $q = $query->select()->orderby('name','desc')->get();

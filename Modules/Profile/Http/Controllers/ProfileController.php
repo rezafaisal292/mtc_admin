@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Profile\Entities\Profile;
 use Illuminate\Support\Facades\File;
+use Modules\Profile\Entities\ProfileKontak;
+use Modules\Sosmed\Entities\Sosmed;
 
 class ProfileController extends Controller
 {
@@ -17,7 +19,8 @@ class ProfileController extends Controller
     public function index()
     {
         $d = Profile::first();
-        return view('profile::index', compact('d'));
+        $sosmed = to_dropdown(Sosmed::All(), 'id', 'name');
+        return view('profile::index', compact('d', 'sosmed'));
     }
 
     /**
@@ -68,42 +71,61 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        // $this->validate($request, [
-        //     'image' => 'required',
-        // ]);
 
-        $image_old = $profile->image;  // Value is not URL but directory file path
-        if (File::exists($image_old)) {
-            File::delete($image_old);
+        $request->validate([
+            'images' => 'max:1024',
+        ]);
+        if ($request->file('images')) {
+            $image_old = $profile->image;  // Value is not URL but directory file path
+            if (File::exists($image_old)) {
+                File::delete($image_old);
+            }
+            // menyimpan data file yang diupload ke variabel $file
+            $image = $request->file('images');
+            // nama file
+            $image->getClientOriginalName();
+
+            // ekstensi file
+            $image->getClientOriginalExtension();
+
+            // real path
+            $image->getRealPath();
+
+            // ukuran file
+            $image->getSize();
+
+            // tipe mime
+            $image->getMimeType();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'images';
+
+
+            $nameFile = $profile->id . '.' . $image->getClientOriginalExtension();
+            $image->move($tujuan_upload, $nameFile);
+
+            $request['image'] =  $tujuan_upload . '/' . $nameFile;
+
+            $d = $request->only('name', 'descp', 'image');
+            $profile->update($d);
+        } else {
+            $d = $request->only('name', 'descp');
+            $profile->update($d);
         }
 
-        // menyimpan data file yang diupload ke variabel $file
-        $image = $request->file('images');
-        // nama file
-        $image->getClientOriginalName();
 
-        // ekstensi file
-        $image->getClientOriginalExtension();
+        if (count($request->id_sosmed) > 0) {
+            ProfileKontak::truncate();
+            for ($i = 0; $i < count($request->id_sosmed); $i++) {
+                ProfileKontak::create(
+                    [
+                        'id_profile' => $profile->id, 
+                        'id_sosmed' => $request->id_sosmed[$i], 
+                        'data' => $request->data[$i]
+                    ]
+                );
+            }
+        }
 
-        // real path
-        $image->getRealPath();
-
-        // ukuran file
-        $image->getSize();
-
-        // tipe mime
-        $image->getMimeType();
-        // isi dengan nama folder tempat kemana file diupload
-        $tujuan_upload = 'images';
-
-
-        $nameFile=$profile->id.'.'. $image->getClientOriginalExtension();
-        $image->move($tujuan_upload, $nameFile);
-    
-        $request['image'] =  $tujuan_upload . '/' . $nameFile;
-       
-        $d= $request->only('name','phone','email','address','descp','image');
-        $profile->update($d);
 
         return redirect('profile')->with(['success' => '`' . $request->name . '` Berhasil disimpan']);
     }
@@ -125,5 +147,4 @@ class ProfileController extends Controller
         //
         return redirect('profile');
     }
-
 }

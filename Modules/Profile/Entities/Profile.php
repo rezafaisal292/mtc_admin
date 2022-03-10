@@ -19,9 +19,6 @@ class Profile extends Model
         'id',
         'image',
         'name',
-        'phone',
-        'email',
-        'address',
         'longlat',
         'descp'
         
