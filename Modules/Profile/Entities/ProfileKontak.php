@@ -5,6 +5,7 @@ namespace Modules\Profile\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Sosmed\Entities\Sosmed;
 
 class ProfileKontak extends Model
 {
@@ -59,5 +60,11 @@ class ProfileKontak extends Model
     {
         return $query->where('label', $value)->first();
     }
+
+    public function sosmed()
+    {
+        return $this->hasOne(Sosmed::class,'id','id_sosmed');
+    }
+
 
 }

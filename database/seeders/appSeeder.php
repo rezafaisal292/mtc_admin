@@ -217,11 +217,19 @@ class appSeeder extends Seeder
             ],
             [
                 'image' => null,
+                'name' => 'Instagram',
+            ],
+            [
+                'image' => null,
                 'name' => 'Email',
             ],
             [
                 'image' => null,
                 'name' => 'Telepon',
+            ],
+            [
+                'image' => null,
+                'name' => 'Alamat',
             ],
         ];
         foreach ($sosmed as $s) {
@@ -243,6 +251,16 @@ class appSeeder extends Seeder
                     'id_profile' => Profile::first()->id,
                     'id_sosmed' => Sosmed::where('name', 'Email')->first()->id,
                     'data' => 'aj@gmail.com',
+                ],
+                [
+                    'id_profile' => Profile::first()->id,
+                    'id_sosmed' => Sosmed::where('name', 'Alamat')->first()->id,
+                    'data' => 'bandung',
+                ],
+                [
+                    'id_profile' => Profile::first()->id,
+                    'id_sosmed' => Sosmed::where('name', 'Instagram')->first()->id,
+                    'data' => 'bandung',
                 ]
             ];
         foreach ($profileKontak as $pk) {

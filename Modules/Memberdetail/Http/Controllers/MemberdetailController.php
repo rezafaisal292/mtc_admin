@@ -74,11 +74,11 @@ class MemberdetailController extends Controller
 
             $request['image'] =  $tujuan_upload . '/' . $nameFile;
 
-            MemberDetail::create($request->only('url', 'image','descp', 'id_member', 'status'));
+            MemberDetail::create($request->only('url', 'image','label','descp', 'id_member', 'status'));
         }
         else
         {
-            MemberDetail::create($request->only('url', 'descp', 'id_member', 'status'));
+            MemberDetail::create($request->only('url', 'label','descp', 'id_member', 'status'));
         }
         return redirect('memberdetail');
     }
@@ -147,14 +147,13 @@ class MemberdetailController extends Controller
 
             $request['image'] =  $tujuan_upload . '/' . $nameFile;
 
-            $memberdetail->update($request->only('image','url', 'descp', 'id_member', 'status'));
+            $memberdetail->update($request->only('image','url','label', 'descp', 'id_member', 'status'));
         }
         else
         {
-            $memberdetail->update(['image'=> null]);
+            $memberdetail->update($request->only('url',  'label','descp', 'id_member', 'status'));
         }
 
-        $memberdetail->update($request->only('url', 'descp', 'id_member', 'status'));
         return redirect('memberdetail');
     }
 

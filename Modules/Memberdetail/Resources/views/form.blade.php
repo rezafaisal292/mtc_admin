@@ -21,6 +21,8 @@ if ($segment !== 'create' ) { $title = 'Ubah'; $method = 'put'; $action = ['memb
 
                 {{ Form::fgSelect('Member', 'id_member', $member,$d->id_member, ['class' => 'form-control'], null, 'text', true) }}
                 {{ Form::fgText('Url', 'url', $d->url, ['class' => 'form-control'], null, 'text', true) }}
+                {{ Form::fgText('Label', 'label', $d->label, ['class' => 'form-control'], null, 'text', true) }}
+                
                 {{ Form::fgSelect('Status', 'status', $status,$d->status, ['class' => 'form-control'], null, 'text', true) }}
                
                 <div class="form-group">

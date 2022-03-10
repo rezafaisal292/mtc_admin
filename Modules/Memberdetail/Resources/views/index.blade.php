@@ -32,7 +32,8 @@ $segment = request()->segment(1);
                                 <th class="col-md-2">Member</th>
                                 <th class="col-md-2">Url</th>
                                 <th class="col-md-2">Image</th>
-                                <th class="col-md-2">Descp</th>
+                                <th class="col-md-1">Label</th>
+                                <th class="col-md-1">Descp</th>
                                 <th class="col-md-1">Status</th>
                                 <th class="col-md-2">Timestamp</th>
                             </tr>
@@ -55,6 +56,7 @@ $segment = request()->segment(1);
                                             -
                                         @endif
                                     </td>
+                                    <td>{{ $d->label }}</td>
                                     <td>{{ substr($d->descp, 0, 50) }}</td>
                                     <td>{{ $status[$d->status] }}</td>
                                     <td>{{ formatDate($d->updated_at) }}</td>

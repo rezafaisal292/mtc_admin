@@ -5,7 +5,9 @@ namespace Modules\Member\Entities;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Memberdetail\Entities\MemberDetail;
 use Modules\Membersosmed\Entities\MemberSosmed;
+use Modules\Produk\Entities\Produk;
 
 class Member extends Model
 {
@@ -74,6 +76,14 @@ class Member extends Model
     public function membersosmed()
     {
         return $this->hasMany(MemberSosmed::class,'member','id');
+    }
+    public function memberproduk()
+    {
+        return $this->hasMany(Produk::class,'member','id');
+    }
+    public function memberdetail()
+    {
+        return $this->hasMany(MemberDetail::class,'id_member','id');
     }
 
 }

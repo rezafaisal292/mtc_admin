@@ -21,6 +21,7 @@ class MemberDetail extends Model
         'id',
         'url',
         'image',
+        'label',
         'descp',
         'id_member',
         'status',

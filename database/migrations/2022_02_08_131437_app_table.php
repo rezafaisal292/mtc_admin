@@ -62,6 +62,7 @@ class AppTable extends Migration
             $table->uuid('id')->primary();
             $table->string('url',100)->nullable();
             $table->string('image',100)->nullable();
+            $table->string('label',50)->nullable();
             $table->text('descp')->nullable();
             $table->uuid('id_member');
             $table->char('status',1);
