@@ -19,7 +19,7 @@ class MembersosmedController extends Controller
     {
         $data=MemberSosmed::fetch($request);
         $member=to_dropdown(Member::Landing(),'id','name');
-        $sosmed=to_dropdown(Sosmed::Landing(),'id','name');
+        $sosmed=to_dropdown(Sosmed::All(),'id','name');
         return view('membersosmed::index',compact('data','member','sosmed'));
     }
 
@@ -31,7 +31,7 @@ class MembersosmedController extends Controller
     {
         $d = new MemberSosmed();
         $member=to_dropdown(Member::Landing(),'id','name');
-        $sosmed=to_dropdown(Sosmed::Landing(),'id','name');
+        $sosmed=to_dropdown(Sosmed::All(),'id','name');
         return view('membersosmed::form',compact('d','member','sosmed'));
     }
 
@@ -67,7 +67,7 @@ class MembersosmedController extends Controller
     {
         $d=$membersosmed;
         $member=to_dropdown(Member::Landing(),'id','name');
-        $sosmed=to_dropdown(Sosmed::Landing(),'id','name');
+        $sosmed=to_dropdown(Sosmed::All(),'id','name');
         return view('membersosmed::form',compact('d','member','sosmed'));
     }
 
